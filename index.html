@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DI.MA. Navaltecnica — Portale Gestionale</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blu:#1F3864;--blu2:#2E74B5;--lblu:#D6E4F0;--lblu2:#EBF3FB;
+  --grn:#375623;--lgre:#E2EFDA;--grn2:#70AD47;
+  --red:#C00000;--lred:#FFE0E0;
+  --yel:#7D6608;--lyel:#FFF2CC;
+  --gray:#F2F2F2;--dgray:#595959;
+  --bg:#F5F7FA;--card:#FFFFFF;--border:#DEE2E8;
+  --txt:#1A1A2E;--txt2:#64748B;--txt3:#94A3B8;
+  --sidebar-w:240px;
+}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--txt);font-size:14px;line-height:1.6}
+
+/* ── SETUP SCREEN ────────────────────────────────────────────────────── */
+#setup-screen{position:fixed;inset:0;background:linear-gradient(135deg,#1F3864,#2E74B5);display:flex;align-items:center;justify-content:center;z-index:2000;padding:20px}
+.setup-box{background:#fff;border-radius:16px;padding:36px;width:100%;max-width:500px}
+.setup-box h2{color:var(--blu);font-size:20px;margin-bottom:8px}
+.setup-box p{color:var(--txt2);font-size:13px;margin-bottom:24px;line-height:1.7}
+.setup-step{background:var(--lblu2);border-radius:8px;padding:14px 16px;margin-bottom:12px;font-size:13px;line-height:1.8}
+.setup-step code{background:var(--lblu);padding:2px 6px;border-radius:4px;font-family:monospace;font-size:12px;color:var(--blu)}
+.setup-field{margin-bottom:14px}
+.setup-field label{display:block;font-size:12px;font-weight:600;color:var(--txt2);margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px}
+.setup-field input{width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:monospace;outline:none}
+.setup-field input:focus{border-color:var(--blu2)}
+.setup-btn{width:100%;padding:12px;background:var(--blu);color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;margin-top:4px}
+.setup-btn:hover{background:var(--blu2)}
+.setup-err{background:var(--lred);color:var(--red);padding:10px 13px;border-radius:8px;font-size:13px;margin-bottom:12px;display:none}
+
+/* ── LOGIN ───────────────────────────────────────────────────────────── */
+#login-screen{position:fixed;inset:0;background:linear-gradient(135deg,#1F3864,#2E74B5);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px}
+.login-box{background:#fff;border-radius:16px;padding:40px;width:100%;max-width:360px}
+.login-logo{text-align:center;margin-bottom:28px}
+.login-logo .anc{font-size:40px;display:block;margin-bottom:8px}
+.login-logo h1{font-size:20px;font-weight:700;color:var(--blu)}
+.login-logo p{font-size:12px;color:var(--txt2);margin-top:3px}
+.login-field{margin-bottom:16px}
+.login-field label{display:block;font-size:12px;font-weight:600;color:var(--txt2);margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px}
+.login-field input{width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;outline:none}
+.login-field input:focus{border-color:var(--blu2)}
+.login-btn{width:100%;padding:12px;background:var(--blu);color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;margin-top:6px}
+.login-btn:hover{background:var(--blu2)}
+.login-err{background:var(--lred);color:var(--red);padding:10px 13px;border-radius:8px;font-size:13px;margin-bottom:12px;display:none}
+.login-hint{font-size:11px;color:var(--txt3);text-align:center;margin-top:12px}
+
+/* ── APP SHELL ───────────────────────────────────────────────────────── */
+#app{display:none;height:100vh;overflow:hidden}
+#app.visible{display:flex}
+
+.sidebar{width:var(--sidebar-w);background:var(--blu);color:#fff;display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto}
+.sb-brand{padding:20px 18px 16px;border-bottom:1px solid rgba(255,255,255,.1)}
+.sb-brand .bn{font-size:15px;font-weight:700}
+.sb-brand .bs{font-size:11px;opacity:.55;margin-top:2px}
+.sb-user{padding:13px 18px;border-bottom:1px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:10px}
+.sb-av{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0}
+.sb-ui .un{font-size:13px;font-weight:600}
+.sb-ui .ur{font-size:11px;opacity:.55}
+.sb-nav{padding:12px 0;flex:1}
+.nsec{padding:8px 18px 4px;font-size:10px;font-weight:700;opacity:.35;text-transform:uppercase;letter-spacing:.8px}
+.ni{display:flex;align-items:center;gap:10px;padding:10px 18px;font-size:13px;cursor:pointer;color:rgba(255,255,255,.75);border-left:3px solid transparent;transition:background .15s}
+.ni:hover{background:rgba(255,255,255,.08);color:#fff}
+.ni.active{background:rgba(255,255,255,.12);color:#fff;border-left-color:#fff}
+.ni svg{width:17px;height:17px;flex-shrink:0;opacity:.8}
+.ni.active svg{opacity:1}
+.nb{margin-left:auto;background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:2px 6px;border-radius:10px}
+.sb-out{padding:13px 18px;border-top:1px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:10px;font-size:13px;cursor:pointer;color:rgba(255,255,255,.5)}
+.sb-out:hover{color:#fff}
+
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.topbar{height:60px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 22px;gap:14px;flex-shrink:0}
+.tb-title{font-size:17px;font-weight:700;color:var(--blu);flex:1}
+.tb-tag{background:var(--lblu2);color:var(--blu2);font-size:11px;font-weight:600;padding:3px 10px;border-radius:12px}
+.tb-date{font-size:12px;color:var(--txt3)}
+.tb-sync{font-size:11px;color:var(--grn);display:flex;align-items:center;gap:5px}
+.tb-sync.err{color:var(--red)}
+.content{flex:1;overflow-y:auto;padding:22px}
+
+/* ── COMPONENTI ─────────────────────────────────────────────────────── */
+.card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px}
+.ct{font-size:14px;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:7px;color:var(--txt)}
+.kgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:20px}
+.kc{background:#fff;border:1px solid var(--border);border-radius:10px;padding:15px 16px;position:relative;overflow:hidden}
+.kc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.kc.g::before{background:var(--grn2)}.kc.b::before{background:var(--blu2)}.kc.r::before{background:var(--red)}.kc.a::before{background:#F59E0B}
+.kl{font-size:11px;color:var(--txt2);font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-bottom:5px}
+.kv{font-size:22px;font-weight:700;color:var(--txt)}
+.ks{font-size:11px;color:var(--txt3);margin-top:3px}
+.kb{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;margin-top:5px}
+.bg{background:var(--lgre);color:var(--grn)}.ba{background:var(--lyel);color:var(--yel)}.br{background:var(--lred);color:var(--red)}.bb{background:var(--lblu);color:var(--blu)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;padding:9px 11px;background:var(--blu);color:#fff;font-size:12px;font-weight:600;white-space:nowrap}
+td{padding:8px 11px;border-bottom:1px solid var(--border);white-space:nowrap}
+tr:hover td{background:#F8FAFC}
+tr:last-child td{border-bottom:none}
+.tft td{background:var(--lblu2);font-weight:700;color:var(--blu)}
+.nr{text-align:right;font-variant-numeric:tabular-nums}
+.pos{color:var(--grn);font-weight:600}.neg{color:var(--red);font-weight:600}
+.pill{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
+.pg{background:var(--lgre);color:var(--grn)}.pa{background:var(--lyel);color:var(--yel)}.pr{background:var(--lred);color:var(--red)}.pb{background:var(--lblu2);color:var(--blu2)}.pgr{background:var(--gray);color:var(--dgray)}
+.alert{padding:11px 14px;border-radius:8px;font-size:13px;margin-bottom:10px;display:flex;gap:9px;align-items:flex-start}
+.ar{background:var(--lred);border-left:3px solid var(--red);color:var(--red)}
+.aa{background:var(--lyel);border-left:3px solid #F59E0B;color:var(--yel)}
+.ag{background:var(--lgre);border-left:3px solid var(--grn2);color:var(--grn)}
+.ab{background:var(--lblu2);border-left:3px solid var(--blu2);color:var(--blu2)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+.btn{padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .2s}
+.bp{background:var(--blu);color:#fff}.bp:hover{background:var(--blu2)}
+.bo{background:#fff;color:var(--blu);border:1.5px solid var(--blu)}.bo:hover{background:var(--lblu2)}
+.bs2{background:var(--grn2);color:#fff}
+.bsm{padding:6px 12px;font-size:12px}
+.fg{margin-bottom:14px}
+.fl{display:block;font-size:12px;font-weight:600;color:var(--txt2);margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px}
+.fi,.fs,.ft{width:100%;padding:8px 11px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit;outline:none;background:#fff}
+.fi:focus,.fs:focus,.ft:focus{border-color:var(--blu2)}
+.ft{resize:vertical;min-height:70px}
+.fr2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.prog{height:5px;background:var(--border);border-radius:3px;overflow:hidden}
+.pb2{height:100%;border-radius:3px}.pbg{background:var(--grn2)}.pbb{background:var(--blu2)}.pba{background:#F59E0B}
+.sh{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.st{font-size:18px;font-weight:700;color:var(--blu)}
+.ss{font-size:13px;color:var(--txt2);margin-top:2px}
+.tw{overflow-x:auto}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid var(--border);border-top-color:var(--blu2);border-radius:50%;animation:spin .7s linear infinite;vertical-align:-2px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.empty{text-align:center;padding:40px;color:var(--txt3);font-size:14px}
+.menu-btn{display:none;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid var(--border);border-radius:8px;cursor:pointer;background:#fff;flex-shrink:0}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:199}
+.overlay.on{display:block}
+@media(max-width:768px){
+  .sidebar{position:fixed;left:-100%;top:0;bottom:0;z-index:200;transition:left .3s}
+  .sidebar.open{left:0}
+  .g2,.g3{grid-template-columns:1fr}
+  .kgrid{grid-template-columns:1fr 1fr}
+  .fr2{grid-template-columns:1fr}
+  .menu-btn{display:flex}
+}
+</style>
+</head>
+<body>
+<div id="preload" style="position:fixed;inset:0;background:#1F3864;display:flex;flex-direction:column;align-items:center;justify-content:center;color:white;font-family:Arial,sans-serif;z-index:9999">
+  <div style="font-size:48px;margin-bottom:16px">⚓</div>
+  <div style="font-size:22px;font-weight:700;margin-bottom:8px">DI.MA. NAVALTECNICA</div>
+  <div style="font-size:14px;opacity:.7;margin-bottom:24px">Portale Gestionale — caricamento...</div>
+  <div id="preload-status" style="font-size:13px;background:rgba(255,255,255,.1);padding:10px 20px;border-radius:8px;max-width:400px;text-align:center">
+    Connessione al database in corso...
+  </div>
+</div>
+
+<!-- SETUP CREDENZIALI SUPABASE -->
+<div id="setup-screen" style="display:none">
+  <div class="setup-box">
+    <h2>⚓ DI.MA. Navaltecnica — Configurazione iniziale</h2>
+    <p>Inserisci le credenziali del tuo progetto Supabase. Le trovi in <strong>Settings → API</strong> del tuo progetto. Vengono salvate nel browser — non dovrai reinserirle.</p>
+    <div class="setup-step">
+      1. Vai su <strong>supabase.com</strong> e apri il tuo progetto<br>
+      2. Vai su <code>Settings → API</code><br>
+      3. Copia <code>Project URL</code> e <code>anon public</code> key
+    </div>
+    <div class="setup-err" id="setup-err"></div>
+    <div class="setup-field">
+      <label>Project URL</label>
+      <input type="url" id="sb-url" placeholder="https://xxxxxxxx.supabase.co">
+    </div>
+    <div class="setup-field">
+      <label>Anon Public Key</label>
+      <input type="text" id="sb-key" placeholder="eyJhbGc...">
+    </div>
+    <button class="setup-btn" onclick="saveConfig()">Connetti e continua</button>
+  </div>
+</div>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">
+      <span class="anc">⚓</span>
+      <h1>DI.MA. NAVALTECNICA</h1>
+      <p>Portale Gestionale Interno</p>
+    </div>
+    <div class="login-err" id="login-err">Email o password non corretti</div>
+    <div class="login-field">
+      <label>Email</label>
+      <input type="email" id="lemail" placeholder="nome@dimasrl.it">
+    </div>
+    <div class="login-field">
+      <label>Password</label>
+      <input type="password" id="lpass" placeholder="••••••••">
+    </div>
+    <button class="login-btn" onclick="doLogin()">Accedi</button>
+    <p class="login-hint">Usa le credenziali fornite dall'amministratore</p>
+  </div>
+</div>
+
+<!-- OVERLAY MOBILE -->
+<div class="overlay" id="overlay" onclick="closeSb()"></div>
+
+<!-- APP -->
+<div id="app">
+  <div class="sidebar" id="sidebar">
+    <div class="sb-brand">
+      <div class="bn">⚓ DI.MA. Navaltecnica</div>
+      <div class="bs">Portale Gestionale v1.0</div>
+    </div>
+    <div class="sb-user">
+      <div class="sb-av" id="sb-av">?</div>
+      <div class="sb-ui">
+        <div class="un" id="sb-nm">—</div>
+        <div class="ur" id="sb-rl">—</div>
+      </div>
+    </div>
+    <nav class="sb-nav">
+      <div class="nsec">Principale</div>
+      <div class="ni active" onclick="go('dashboard')" data-p="dashboard">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        Dashboard
+      </div>
+      <div class="nsec">Operativo</div>
+      <div class="ni" onclick="go('commesse')" data-p="commesse">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+        Commesse
+        <span class="nb" id="nb-comm">0</span>
+      </div>
+      <div class="ni" onclick="go('rapportino')" data-p="rapportino">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+        Rapportino
+      </div>
+      <div class="nsec">Impostazioni</div>
+      <div class="ni" onclick="go('admin')" data-p="admin" id="nav-admin">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        Amministrazione
+      </div>
+      <div class="ni" onclick="go('storico')" data-p="storico">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Storico rapportini
+      </div>
+      <div class="nsec">Controllo</div>
+      <div class="ni" onclick="go('finanza')" data-p="finanza">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10"/></svg>
+        Cruscotto finanziario
+      </div>
+      <div class="ni" onclick="go('tesoreria')" data-p="tesoreria">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+        Tesoreria
+      </div>
+      <div class="ni" onclick="go('kpi')" data-p="kpi">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        Piano &amp; KPI
+      </div>
+    </nav>
+    <div class="sb-out" onclick="doLogout()">
+      <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+      Esci
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <button class="menu-btn" onclick="toggleSb()">
+        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <div class="tb-title" id="ptitle">Dashboard</div>
+      <div class="tb-sync" id="sync-status">● Connesso</div>
+      <span class="tb-tag" id="ptag">—</span>
+      <span class="tb-date" id="pdate"></span>
+    </div>
+    <div class="content" id="content">
+      <div class="empty"><div class="spin"></div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── SUPABASE CLIENT NATIVO (fetch REST — nessuna libreria esterna) ─────────
+function createSBClient(url, key){
+  const h = {
+    'apikey': key,
+    'Authorization': 'Bearer ' + key,
+    'Content-Type': 'application/json',
+    'Prefer': 'return=representation'
+  };
+
+  function qb(table){
+    let _filters=[], _select='*', _order=null, _limit=null, _single=false;
+
+    const build = () => {
+      let qs = '?select=' + _select;
+      _filters.forEach(f => qs += '&' + f);
+      if(_order) qs += '&order=' + _order;
+      if(_limit) qs += '&limit=' + _limit;
+      return url + '/rest/v1/' + table + qs;
+    };
+
+    const run = async (method, body=null) => {
+      const opts = { method, headers: {...h} };
+      if(body) opts.body = JSON.stringify(body);
+      if(method==='POST')   opts.headers['Prefer'] = 'return=representation';
+      if(method==='PATCH')  opts.headers['Prefer'] = 'return=minimal';
+      if(method==='DELETE') opts.headers['Prefer'] = 'return=minimal';
+      try {
+        const r = await fetch(build(), opts).catch(e => {
+          if(e.message && (e.message.includes('CORS') || e.message.includes('fetch') || e.message.includes('Failed'))) {
+            throw new Error('CORS/rete: apri il file da un server locale. Istruzioni: premi F12 → Console per dettagli.');
+          }
+          throw e;
+        });
+        const txt = await r.text();
+        const data = txt ? JSON.parse(txt) : (_single ? null : []);
+        if(!r.ok) return { data: null, error: { message: data?.message || data?.error || txt || r.statusText } };
+        const result = _single ? (Array.isArray(data) ? data[0] : data) : data;
+        return { data: result, error: null };
+      } catch(e) {
+        return { data: null, error: { message: e.message } };
+      }
+    };
+
+    return {
+      select(cols='*'){ _select=cols; return this; },
+      eq(col,val){ _filters.push(col+'=eq.'+encodeURIComponent(val)); return this; },
+      order(col, opts={}){ _order=col+(opts.ascending===false?'.desc':'.asc'); return this; },
+      limit(n){ _limit=n; return this; },
+      single(){ _single=true; _limit=1; return this; },
+      where(){ return this; }, // compatibilità
+      then(res,rej){ return run('GET').then(res,rej); },
+      // Eseguono direttamente (async)
+      async insert(data){ 
+        const body = Array.isArray(data)?data:[data];
+        return run('POST', body.length===1?body[0]:body);
+      },
+      async update(data){ return run('PATCH', data); },
+      async upsert(data, opts={}){
+        const extra = opts.onConflict ? {'Prefer':'resolution=merge-duplicates,return=representation'} : {};
+        Object.assign(h, extra);
+        const r = await run('POST', Array.isArray(data)?data:[data]);
+        // ripristina
+        h['Prefer'] = 'return=representation';
+        return r;
+      },
+      async delete(){ return run('DELETE'); },
+    };
+  }
+
+  return {
+    from: (table) => qb(table)
+  };
+}
+
+// ── CONFIG ────────────────────────────────────────────────────────────────
+const PASSWORDS = {
+  'direzione@dimasrl.it':       { pass:'dima2026',    ruolo:'direzione',       pages:['dashboard','commesse','rapportino','storico','finanza','tesoreria','kpi','admin'] },
+  'cantiere@dimasrl.it':        { pass:'cantiere1',   ruolo:'cantiere',        pages:['rapportino','commesse','storico'] },
+  'admin@dimasrl.it':           { pass:'admin123',    ruolo:'amministrazione', pages:['dashboard','finanza','tesoreria','kpi','storico'] },
+  'commercialista@dimasrl.it':  { pass:'acunzo2026',  ruolo:'commercialista',  pages:['finanza','kpi'] },
+};
+
+const PAGE_TITLES = {
+  dashboard:'Dashboard', commesse:'Commesse attive', rapportino:'Rapportino giornaliero',
+  storico:'Storico rapportini', finanza:'Cruscotto finanziario',
+  tesoreria:'Tesoreria & flussi', kpi:'Piano industriale & KPI',
+  admin:'Amministrazione anagrafiche'
+};
+
+let SB = null, currentUser = null, currentPage = 'dashboard';
+let cache = { commesse:[], risorse:[], rapportini:[] };
+
+// ── SETUP E CONNESSIONE SUPABASE ─────────────────────────────────────────
+function loadConfig(){
+  const url = localStorage.getItem('dima_sb_url');
+  const key = localStorage.getItem('dima_sb_key');
+  return url && key ? { url, key } : null;
+}
+
+async function saveConfig(){
+  const url = document.getElementById('sb-url').value.trim();
+  const key = document.getElementById('sb-key').value.trim();
+  const err = document.getElementById('setup-err');
+  if(!url || !key){ err.textContent='Inserisci entrambi i valori.'; err.style.display='block'; return; }
+  err.style.display='none';
+  try {
+    const client = createSBClient(url, key);
+    const { error } = await client.from('profili').select('id').limit(1);
+    if(error) throw error;
+    localStorage.setItem('dima_sb_url', url);
+    localStorage.setItem('dima_sb_key', key);
+    SB = client;
+    showLogin();
+  } catch(e){
+    err.textContent = 'Connessione fallita: ' + (e.message||'verifica URL e chiave.');
+    err.style.display='block';
+  }
+}
+
+async function initApp(){
+  if(typeof setPreload === 'function') setPreload('Creazione client database...', false);
+  SB = createSBClient("https://vodrwivqqnsliuhdvuro.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZvZHJ3aXZxcW5zbGl1aGR2dXJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkwMDUxNDEsImV4cCI6MjA5NDU4MTE0MX0.i1Kvb9qUfVmcNPBsVc2jOMq5Ro-MJPdsHu8ZKe8vz54");
+  try {
+    const { error } = await SB.from('profili').select('id').limit(1);
+    if(error) throw error;
+    if(typeof setPreload === 'function') setPreload('Connesso — apertura login...', true);
+    setTimeout(showLogin, 400);
+  } catch(e) {
+    const isCors = e.message && (e.message.includes('fetch') || e.message.includes('network') || e.message.toLowerCase().includes('load'));
+    const msg = isCors 
+      ? 'Il browser blocca le richieste da file locale. Usa Chrome con: --allow-file-access-from-files oppure apri tramite un server locale.'
+      : 'Errore connessione: ' + e.message;
+    if(typeof setPreload === 'function') setPreload(msg, false);
+    console.error('Errore initApp:', e);
+    document.getElementById('setup-err').textContent = 'Errore connessione: ' + e.message;
+    document.getElementById('setup-err').style.display = 'block';
+  }
+}
+
+function showSetup(){ document.getElementById('setup-screen').style.display='flex'; }
+function showLogin(){
+  document.getElementById('setup-screen').style.display='none';
+  document.getElementById('login-screen').style.display='flex';
+}
+
+// ── AUTH ─────────────────────────────────────────────────────────────────
+async function doLogin(){
+  const email = document.getElementById('lemail').value.trim().toLowerCase();
+  const pass  = document.getElementById('lpass').value;
+  const err   = document.getElementById('login-err');
+  const cfg   = PASSWORDS[email];
+  if(!cfg || cfg.pass !== pass){ err.style.display='block'; return; }
+  err.style.display='none';
+
+  const { data: profilo } = await SB.from('profili').select('*').eq('email', email).single();
+  currentUser = { email, ruolo: cfg.ruolo, pages: cfg.pages,
+    nome:     profilo?.nome     || email,
+    iniziali: profilo?.iniziali || email[0].toUpperCase() };
+
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('app').classList.add('visible');
+  document.getElementById('sb-av').textContent  = currentUser.iniziali;
+  document.getElementById('sb-nm').textContent  = currentUser.nome;
+  document.getElementById('sb-rl').textContent  = currentUser.ruolo;
+  document.getElementById('ptag').textContent   = currentUser.ruolo;
+  document.getElementById('pdate').textContent  = new Date().toLocaleDateString('it-IT',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
+
+  await loadCache();
+  // nav-admin sempre visibile, l'accesso è protetto in go()
+  go(cfg.pages[0]);
+}
+
+function doLogout(){
+  document.getElementById('app').classList.remove('visible');
+  document.getElementById('login-screen').style.display='flex';
+  currentUser = null;
+  document.getElementById('lemail').value='';
+  document.getElementById('lpass').value='';
+}
+
+document.addEventListener('keypress', e => { if(e.key==='Enter' && document.getElementById('login-screen').style.display==='flex') doLogin(); });
+
+// ── CACHE DAL DATABASE ────────────────────────────────────────────────────
+async function loadCache(){
+  setSyncStatus('caricamento...', false);
+  const [c, r] = await Promise.all([
+    SB.from('commesse').select('*').order('codice'),
+    SB.from('risorse').select('*').where ? SB.from('risorse').select('*') : SB.from('risorse').select('*'),
+  ]);
+  cache.commesse = c.data || [];
+  cache.risorse  = r.data || [];
+  const nb = cache.commesse.filter(x=>x.stato==='In corso').length;
+  document.getElementById('nb-comm').textContent = nb;
+  setSyncStatus('● Connesso', true);
+}
+
+function setSyncStatus(msg, ok){
+  const el = document.getElementById('sync-status');
+  el.textContent = msg; el.className = 'tb-sync' + (ok ? '' : ' err');
+}
+
+// ── NAVIGAZIONE ───────────────────────────────────────────────────────────
+function go(page){
+  if(currentUser && !currentUser.pages.includes(page)){
+    alert('Sezione non disponibile per il tuo profilo.'); return;
+  }
+  currentPage = page;
+  document.querySelectorAll('.ni').forEach(n => {
+    n.classList.toggle('active', n.dataset.p === page);
+  });
+  document.getElementById('ptitle').textContent = PAGE_TITLES[page] || page;
+  render(page);
+  closeSb();
+  document.getElementById('content').scrollTop = 0;
+}
+
+function toggleSb(){ document.getElementById('sidebar').classList.toggle('open'); document.getElementById('overlay').classList.toggle('on'); }
+function closeSb(){  document.getElementById('sidebar').classList.remove('open'); document.getElementById('overlay').classList.remove('on'); }
+
+// ── RENDER ────────────────────────────────────────────────────────────────
+function render(page){
+  const c = document.getElementById('content');
+  const pages = { dashboard:renderDash, commesse:renderCommesse, rapportino:renderRap,
+    storico:renderStorico, finanza:renderFinanza, tesoreria:renderTeso, kpi:renderKpi,
+    admin:renderAdmin };
+  if(pages[page]) pages[page](c); else c.innerHTML = '<p class="empty">Pagina in costruzione.</p>';
+}
+
+function loading(c){ c.innerHTML='<div class="empty"><div class="spin"></div> Caricamento dal database...</div>'; }
+
+// ══ DASHBOARD ════════════════════════════════════════════════════════════
+function renderDash(c){
+  const comm   = cache.commesse;
+  const totR   = comm.reduce((a,x)=>a+(x.ricavo||0),0);
+  const totM   = comm.reduce((a,x)=>a+(x.ricavo||0)-(x.costo_budget||0),0);
+  const inC    = comm.filter(x=>x.stato==='In corso').length;
+  const avgAv  = comm.length ? Math.round(comm.reduce((a,x)=>a+(x.avanzamento||0),0)/comm.length) : 0;
+
+  c.innerHTML = `
+  <div class="kgrid">
+    <div class="kc b"><div class="kl">Ricavi portafoglio</div><div class="kv">€${(totR/1000).toFixed(0)}K</div><div class="ks">${comm.length} commesse</div><span class="kb bb">+25,5% YoY</span></div>
+    <div class="kc g"><div class="kl">Margine lordo</div><div class="kv">€${(totM/1000).toFixed(0)}K</div><div class="ks">${totR?((totM/totR)*100).toFixed(1):0}% margine</div><span class="kb bg">EBITDA 12,5%</span></div>
+    <div class="kc b"><div class="kl">Commesse in corso</div><div class="kv">${inC}</div><div class="ks">Avanz. medio ${avgAv}%</div></div>
+    <div class="kc g"><div class="kl">DSCR bancabilità</div><div class="kv">7,05x</div><div class="ks">Soglia ≥ 1,2x</div><span class="kb bg">OTTIMO</span></div>
+    <div class="kc a"><div class="kl">DSO incasso</div><div class="kv">97 gg</div><div class="ks">Target ≤ 80 gg</div><span class="kb ba">ATTENZIONE</span></div>
+    <div class="kc r"><div class="kl">Debiti tributari</div><div class="kv">€990K</div><div class="ks">Incl. avvisi bonari</div><span class="kb ba">Rateizzazione</span></div>
+  </div>
+  <div class="g2">
+    <div class="card">
+      <div class="ct">Avanzamento commesse (dal database)</div>
+      ${comm.slice(0,5).map(x=>`
+      <div style="margin-bottom:11px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+          <span style="font-size:12px;font-weight:600">${x.codice}</span>
+          <span style="font-size:12px;color:var(--txt2)">${x.avanzamento}%</span>
+        </div>
+        <div class="prog"><div class="pb2 ${x.avanzamento>70?'pbg':x.avanzamento>40?'pbb':'pba'}" style="width:${x.avanzamento}%"></div></div>
+        <span style="font-size:11px;color:var(--txt3)">${x.cliente}</span>
+      </div>`).join('')}
+    </div>
+    <div class="card">
+      <div class="ct">Alert prioritari</div>
+      <div class="alert aa"><div><strong>DSO 97 gg</strong> — Attivare factoring pro-soluto su Fincantieri per ridurre a ≤ 80 gg.</div></div>
+      <div class="alert ar"><div><strong>Avvisi bonari €325.653</strong> — Definizione entro Q2 2026. Urgente contattare commercialista.</div></div>
+      <div class="alert ab"><div><strong>Mutuo consolidamento €500K</strong> — Business case pronto, DSCR post-finanz. 4,70x.</div></div>
+    </div>
+  </div>`;
+}
+
+// ══ COMMESSE ═════════════════════════════════════════════════════════════
+function renderCommesse(c){
+  const comm = cache.commesse;
+  const rows = comm.map(x=>{
+    const m=x.ricavo-x.costo_budget; const mp=x.ricavo?((m/x.ricavo)*100).toFixed(1):0;
+    const sc=x.stato==='In corso'?'pb':x.stato==='Avvio'?'pa':x.stato==='Chiusa'?'pg':'pgr';
+    return`<tr>
+      <td><strong>${x.codice}</strong></td><td>${x.descrizione}</td>
+      <td>${x.cliente}</td><td>${x.cantiere}</td>
+      <td><span class="pill ${sc}">${x.stato}</span></td>
+      <td class="nr">€${(x.ricavo||0).toLocaleString('it-IT')}</td>
+      <td class="nr pos">€${m.toLocaleString('it-IT')}</td>
+      <td class="nr">${mp}%</td>
+      <td style="min-width:80px">
+        <div class="prog" style="margin-bottom:2px"><div class="pb2 ${x.avanzamento>70?'pbg':x.avanzamento>40?'pbb':'pba'}" style="width:${x.avanzamento}%"></div></div>
+        <span style="font-size:11px;color:var(--txt2)">${x.avanzamento}%</span>
+      </td>
+      <td>
+        <button class="btn bp bsm" onclick="aggAvanz('${x.id}','${x.codice}',${x.avanzamento})">Aggiorna</button>
+      </td>
+    </tr>`;
+  }).join('');
+  const tR=comm.reduce((a,x)=>a+(x.ricavo||0),0), tM=comm.reduce((a,x)=>a+(x.ricavo||0)-(x.costo_budget||0),0);
+  c.innerHTML=`
+  <div class="sh"><div><div class="st">Portafoglio commesse</div><div class="ss">${comm.length} commesse — dati dal database in tempo reale</div></div>
+  <button class="btn bp bsm" onclick="nuovaCommessa()">+ Nuova commessa</button></div>
+  <div class="card" style="padding:0"><div class="tw"><table>
+    <thead><tr><th>Codice</th><th>Descrizione</th><th>Cliente</th><th>Cantiere</th><th>Stato</th><th class="nr">Ricavo €</th><th class="nr">Margine €</th><th class="nr">%</th><th>Avanz.</th><th>Azione</th></tr></thead>
+    <tbody>${rows}</tbody>
+    <tfoot><tr class="tft"><td colspan="5">TOTALE</td><td class="nr">€${tR.toLocaleString('it-IT')}</td><td class="nr pos">€${tM.toLocaleString('it-IT')}</td><td class="nr">${tR?((tM/tR)*100).toFixed(1):0}%</td><td colspan="2"></td></tr></tfoot>
+  </table></div></div>`;
+}
+
+async function aggAvanz(id, cod, attuale){
+  const nuovoStr = prompt(`Aggiornamento avanzamento — ${cod}\nValore attuale: ${attuale}%\nInserisci nuovo valore (0-100):`);
+  if(nuovoStr === null) return;
+  const nuovo = parseInt(nuovoStr);
+  if(isNaN(nuovo)||nuovo<0||nuovo>100){ alert('Valore non valido.'); return; }
+  setSyncStatus('salvataggio...', false);
+  const { error } = await SB.from('commesse').update({ avanzamento: nuovo, updated_at: new Date().toISOString() }).eq('id', id);
+  if(error){ alert('Errore: '+error.message); setSyncStatus('● Errore',false); return; }
+  await SB.from('avanzamenti').insert({ commessa_id:id, commessa_cod:cod, avanzamento:nuovo, aggiornato_da:currentUser.email });
+  await loadCache();
+  setSyncStatus('● Connesso', true);
+  render('commesse');
+}
+
+function nuovaCommessa(){
+  alert('Form nuova commessa — in produzione apre un modale con tutti i campi e salva direttamente nel database.');
+}
+
+// ══ RAPPORTINO ════════════════════════════════════════════════════════════
+let rapRighe = [];
+
+function renderRap(c){
+  const optComm = cache.commesse.map(x=>`<option value="${x.id}|${x.codice}|${x.cantiere}">${x.codice} — ${x.cliente}</option>`).join('');
+  const optRis  = cache.risorse.map(x=>`<option value="${x.id}|${x.nominativo}|${x.qualifica}|${x.costo_ord}">${x.nominativo} — ${x.qualifica}</option>`).join('');
+
+  c.innerHTML=`
+  <div class="g2" style="margin-bottom:18px">
+    <div class="card">
+      <div class="fg"><label class="fl">Data</label><input type="date" class="fi" id="rd" value="${new Date().toISOString().slice(0,10)}"></div>
+      <div class="fg"><label class="fl">Commessa</label><select class="fs" id="rc" onchange="syncCant()">${optComm}</select></div>
+    </div>
+    <div class="card">
+      <div class="fg"><label class="fl">Cantiere</label><input type="text" class="fi" id="rca" placeholder="Auto da commessa"></div>
+      <div class="fg"><label class="fl">Caposquadra</label><input type="text" class="fi" id="rcp" value="${currentUser.nome}"></div>
+    </div>
+  </div>
+  <div class="card" style="margin-bottom:18px">
+    <div class="ct">Presenze e ore</div>
+    <div style="overflow-x:auto">
+      <table><thead><tr><th style="min-width:170px">Risorsa</th><th>Ore ord.</th><th>Ore str.</th><th>Tipo str.</th><th>Trasferta €</th><th class="nr">Costo €</th><th></th></tr></thead>
+      <tbody id="rap-tbody"></tbody></table>
+    </div>
+    <button class="btn bo bsm" style="margin-top:12px" onclick="addRiga()">+ Aggiungi riga</button>
+    <div style="display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:1px solid var(--border);margin-top:12px">
+      <strong>Totale manodopera</strong>
+      <strong style="font-size:18px;color:var(--blu)" id="grand-tot">€ 0,00</strong>
+    </div>
+  </div>
+  <div style="display:flex;gap:12px;justify-content:flex-end">
+    <button class="btn bo" onclick="go('rapportino')">Azzera</button>
+    <button class="btn bp" onclick="salvaRap()">Salva rapportino nel database</button>
+  </div>`;
+
+  rapRighe = [];
+  addRiga();
+  syncCant();
+
+  const optRis2 = cache.risorse.map(x=>`<option value="${x.id}|${x.nominativo}|${x.qualifica}|${x.costo_ord}">${x.nominativo} — ${x.qualifica}</option>`).join('');
+  document.querySelectorAll('.rap-sel').forEach(s=>{ s.innerHTML=`<option value="">— seleziona —</option>${optRis2}`; });
+}
+
+function syncCant(){
+  const sel = document.getElementById('rc');
+  if(!sel?.value) return;
+  const [,, cantiere] = sel.value.split('|');
+  document.getElementById('rca').value = cantiere || '';
+}
+
+function addRiga(){
+  const i = rapRighe.length;
+  rapRighe.push({id:null,ore_ord:0,ore_str:0,tipo_str:'ORD',trasferta:0,costo_ora:0});
+  const optRis = cache.risorse.map(x=>`<option value="${x.id}|${x.nominativo}|${x.qualifica}|${x.costo_ord}">${x.nominativo} — ${x.qualifica}</option>`).join('');
+  const tr = document.createElement('tr');
+  tr.id = `rr-${i}`;
+  tr.innerHTML=`
+    <td><select class="fs rap-sel" style="font-size:12px" onchange="setRisorsa(${i},this)"><option value="">— seleziona —</option>${optRis}</select></td>
+    <td><input type="number" class="fi" style="width:70px;font-size:12px;padding:5px 8px" min="0" max="12" step="0.5" value="0" oninput="calcRiga(${i},this,'ord')"></td>
+    <td><input type="number" class="fi" style="width:70px;font-size:12px;padding:5px 8px" min="0" max="6" step="0.5" value="0" oninput="calcRiga(${i},this,'str')"></td>
+    <td><select class="fs" style="font-size:12px" onchange="calcRiga(${i},this,'tipo')">
+      <option value="1.25">Std +25%</option><option value="1.30">STR30 +30%</option><option value="1.50">STR50 +50%</option>
+    </select></td>
+    <td><input type="number" class="fi" style="width:80px;font-size:12px;padding:5px 8px" min="0" value="0" oninput="calcRiga(${i},this,'traf')"></td>
+    <td class="nr" id="rt-${i}" style="font-weight:700;color:var(--blu)">€ 0,00</td>
+    <td><button class="btn bo bsm" onclick="delRiga(${i})">✕</button></td>`;
+  document.getElementById('rap-tbody').appendChild(tr);
+}
+
+function setRisorsa(i, sel){
+  if(!sel.value) return;
+  const [id,,, costo] = sel.value.split('|');
+  rapRighe[i] = { ...rapRighe[i], risorsa_id: id, costo_ora: parseFloat(costo)||0 };
+  calcTot();
+}
+
+function calcRiga(i, el, tipo){
+  const tr = document.getElementById(`rr-${i}`);
+  if(!tr) return;
+  const inputs = tr.querySelectorAll('input,select');
+  const ord   = parseFloat(inputs[1].value)||0;
+  const str   = parseFloat(inputs[2].value)||0;
+  const coef  = parseFloat(inputs[3].value)||1.25;
+  const traf  = parseFloat(inputs[4].value)||0;
+  const r = rapRighe[i];
+  const tot = (ord + str * coef) * (r?.costo_ora||0) + traf;
+  rapRighe[i] = { ...r, ore_ord:ord, ore_str:str, tipo_str:coef===1.5?'STR50':coef===1.3?'STR30':'ORD', trasferta:traf, costo_giorno:tot };
+  const el2 = document.getElementById(`rt-${i}`);
+  if(el2) el2.textContent = `€ ${tot.toFixed(2)}`;
+  calcTot();
+}
+
+function calcTot(){
+  const tot = rapRighe.reduce((a,r)=>a+(r.costo_giorno||0), 0);
+  const el = document.getElementById('grand-tot');
+  if(el) el.textContent = `€ ${tot.toFixed(2)}`;
+}
+
+function delRiga(i){
+  const tr = document.getElementById(`rr-${i}`);
+  if(tr) tr.remove();
+  rapRighe[i] = null;
+  calcTot();
+}
+
+async function salvaRap(){
+  const commSel = document.getElementById('rc')?.value;
+  if(!commSel){ alert('Seleziona una commessa.'); return; }
+  const [comm_id, comm_cod] = commSel.split('|');
+  const data_lav = document.getElementById('rd')?.value;
+  const cantiere = document.getElementById('rca')?.value || '';
+  const capo     = document.getElementById('rcp')?.value || currentUser.nome;
+  const righeOk  = rapRighe.filter(r=>r && r.risorsa_id && (r.ore_ord>0||r.ore_str>0));
+  if(!righeOk.length){ alert('Inserisci almeno una riga con ore e risorsa.'); return; }
+  const totale   = righeOk.reduce((a,r)=>a+(r.costo_giorno||0), 0);
+
+  setSyncStatus('salvataggio...', false);
+
+  const { data: rap, error: e1 } = await SB.from('rapportini').insert({
+    data_lavoro: data_lav, commessa_id: comm_id, commessa_cod: comm_cod,
+    cantiere, caposquadra: capo, totale_costo: totale, salvato_da: currentUser.email
+  }).select().single();
+
+  if(e1){ alert('Errore salvataggio: '+e1.message); setSyncStatus('● Errore',false); return; }
+
+  const righe = righeOk.map(r=>({
+    rapportino_id: rap.id, risorsa_id: r.risorsa_id,
+    nominativo: cache.risorse.find(x=>x.id===r.risorsa_id)?.nominativo||'',
+    qualifica:  cache.risorse.find(x=>x.id===r.risorsa_id)?.qualifica||'',
+    ore_ord: r.ore_ord, ore_str: r.ore_str, tipo_str: r.tipo_str,
+    trasferta: r.trasferta, costo_ora: r.costo_ora, costo_giorno: r.costo_giorno||0
+  }));
+
+  const { error: e2 } = await SB.from('rapportino_righe').insert(righe);
+  if(e2){ alert('Errore righe: '+e2.message); setSyncStatus('● Errore',false); return; }
+
+  setSyncStatus('● Connesso', true);
+  alert(`✅ Rapportino salvato nel database!\n\nData: ${data_lav}\nCommessa: ${comm_cod}\nTotale: €${totale.toFixed(2)}\n\nLa direzione può vederlo subito in "Storico rapportini".`);
+  go('rapportino');
+}
+
+// ══ STORICO RAPPORTINI ════════════════════════════════════════════════════
+async function renderStorico(c){
+  loading(c);
+  const { data, error } = await SB.from('rapportini')
+    .select('*, rapportino_righe(*)')
+    .order('data_lavoro', { ascending: false })
+    .limit(50);
+
+  if(error){ c.innerHTML=`<div class="alert ar">Errore: ${error.message}</div>`; return; }
+  if(!data||!data.length){ c.innerHTML='<div class="empty">Nessun rapportino salvato. Il primo lo salva il caposquadra.</div>'; return; }
+
+  const rows = data.map(r=>`
+    <tr onclick="toggleDettaglio('det-${r.id}')" style="cursor:pointer">
+      <td><strong>${r.data_lavoro}</strong></td>
+      <td>${r.commessa_cod}</td>
+      <td>${r.cantiere}</td>
+      <td>${r.caposquadra}</td>
+      <td>${r.rapportino_righe?.length||0}</td>
+      <td class="nr pos">€ ${(r.totale_costo||0).toLocaleString('it-IT',{minimumFractionDigits:2})}</td>
+      <td>${r.salvato_da||'—'}</td>
+    </tr>
+    <tr id="det-${r.id}" style="display:none"><td colspan="7" style="background:var(--lblu2);padding:0">
+      <table style="margin:0;font-size:12px">
+        <thead><tr style="background:var(--lblu)"><th>Risorsa</th><th>Ore ord.</th><th>Ore str.</th><th>Tipo str.</th><th>Trasferta</th><th class="nr">Costo €</th></tr></thead>
+        <tbody>${(r.rapportino_righe||[]).map(rl=>`<tr>
+          <td>${rl.nominativo} <span style="color:var(--txt3);font-size:11px">${rl.qualifica||''}</span></td>
+          <td>${rl.ore_ord}</td><td>${rl.ore_str}</td><td>${rl.tipo_str}</td>
+          <td>€${(rl.trasferta||0).toFixed(2)}</td>
+          <td class="nr">€${(rl.costo_giorno||0).toFixed(2)}</td>
+        </tr>`).join('')}</tbody>
+      </table>
+    </td></tr>`).join('');
+
+  const totale = data.reduce((a,r)=>a+(r.totale_costo||0),0);
+  c.innerHTML=`
+  <div class="sh"><div><div class="st">Storico rapportini</div><div class="ss">${data.length} rapportini — dati dal database. Clicca una riga per il dettaglio.</div></div>
+    <button class="btn bp bsm" onclick="renderStorico(document.getElementById('content'))">↺ Aggiorna</button></div>
+  <div class="card" style="padding:0"><div class="tw"><table>
+    <thead><tr><th>Data</th><th>Commessa</th><th>Cantiere</th><th>Caposquadra</th><th>Righe</th><th class="nr">Totale €</th><th>Salvato da</th></tr></thead>
+    <tbody>${rows}</tbody>
+    <tfoot><tr class="tft"><td colspan="5">TOTALE</td><td class="nr">€ ${totale.toLocaleString('it-IT',{minimumFractionDigits:2})}</td><td></td></tr></tfoot>
+  </table></div></div>`;
+}
+
+function toggleDettaglio(id){ const el=document.getElementById(id); if(el) el.style.display=el.style.display==='none'?'table-row':'none'; }
+
+// ══ FINANZA ═══════════════════════════════════════════════════════════════
+function renderFinanza(c){
+  c.innerHTML=`
+  <div class="kgrid">
+    <div class="kc g"><div class="kl">Ricavi 2025</div><div class="kv">€ 8,30M</div><span class="kb bg">+25,5% vs 2024</span></div>
+    <div class="kc g"><div class="kl">EBITDA 2025</div><div class="kv">€ 1,207M</div><span class="kb bg">12,5% margin</span></div>
+    <div class="kc g"><div class="kl">Patrimonio netto</div><div class="kv">€ 849.976</div><span class="kb bg">+10,3% YoY</span></div>
+    <div class="kc b"><div class="kl">PFN</div><div class="kv">€ 808.894</div><span class="kb bb">-25,3% vs 2024</span></div>
+  </div>
+  <div class="g2">
+    <div class="card" style="padding:0">
+      <div style="padding:14px 18px 8px"><div class="ct">Indicatori di bancabilità — bilancio 2025</div></div>
+      <div class="tw"><table>
+        <thead><tr><th>Indicatore</th><th class="nr">2025</th><th class="nr">Soglia</th><th>Rating</th></tr></thead>
+        <tbody>
+          ${[['PFN/EBITDA','0,67x','≤ 4x','OTTIMO','g'],['DSCR','7,05x','≥ 1,2x','OTTIMO','g'],
+            ['Leverage','1,01x','≤ 3x','OTTIMO','g'],['Interest Cover','11,51x','≥ 3x','OTTIMO','g'],
+            ['EBITDA Margin','12,5%','≥ 5%','OTTIMO','g'],['ROC','66,5%','≥ 5%','OTTIMO','g'],
+            ['DSO','97 gg','≤ 90 gg','ATTENZIONE','a'],['PFN/PN','0,95x','≤ 1,5x','OTTIMO','g'],
+          ].map(([n,v,s,r,cl],i)=>`<tr><td style="${i%2===0?'font-weight:600':''}">${n}</td>
+            <td class="nr pos">${v}</td><td class="nr" style="color:var(--txt3)">${s}</td>
+            <td><span class="pill p${cl}">${r}</span></td></tr>`).join('')}
+        </tbody>
+      </table></div>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:16px">
+        <div class="ct">Struttura debito bancario</div>
+        ${[['Finanziamento ISP (M/L)','€ 331.339','g'],['Finanziamento UC (M/L)','€ 69.879','g'],
+           ['Anticipo fatture (breve)','€ 361.166','r'],['Anticipo export (breve)','€ 100.000','r'],
+        ].map(([l,v,c])=>`<div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border)">
+          <span style="font-size:13px">${l}</span>
+          <span style="font-weight:700;color:var(--${c==='g'?'grn':'red'})">${v}</span>
+        </div>`).join('')}
+        <div style="display:flex;justify-content:space-between;padding:10px 0 4px"><strong>TOTALE</strong><strong style="color:var(--blu)">€ 866.936</strong></div>
+        <div class="alert ab" style="margin-top:10px">Business case mutuo €500K pronto. DSCR post-finanz. <strong>4,70x</strong>.</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ══ TESORERIA ═════════════════════════════════════════════════════════════
+async function renderTeso(c){
+  loading(c);
+  const anno = new Date().getFullYear();
+  const { data: actual } = await SB.from('tesoreria_actual').select('*').eq('anno', anno).order('mese');
+  const actualMap = {};
+  (actual||[]).forEach(r=>{ actualMap[r.mese] = r; });
+
+  const budget = [
+    {m:1,n:'Gen',inp:750000,out:520000},{m:2,n:'Feb',inp:780000,out:531000},
+    {m:3,n:'Mar',inp:800000,out:545000},{m:4,n:'Apr',inp:750000,out:520000},
+    {m:5,n:'Mag',inp:790000,out:525000},{m:6,n:'Giu',inp:810000,out:530000},
+    {m:7,n:'Lug',inp:720000,out:510000},{m:8,n:'Ago',inp:680000,out:505000},
+    {m:9,n:'Set',inp:760000,out:518000},{m:10,n:'Ott',inp:800000,out:535000},
+    {m:11,n:'Nov',inp:830000,out:530000},{m:12,n:'Dic',inp:790000,out:545000},
+  ];
+
+  const rows = budget.map(b=>{
+    const ac = actualMap[b.m];
+    const net = b.inp - b.out;
+    let sem = '—';
+    if(ac?.entrate){ const r=ac.entrate/b.inp; sem=r>=1?'✅':r>=.9?'⚠️':'🔴'; }
+    return`<tr>
+      <td><strong>${b.n} ${anno}</strong></td>
+      <td class="nr pos">€${b.inp.toLocaleString('it-IT')}</td>
+      <td class="nr neg">€${b.out.toLocaleString('it-IT')}</td>
+      <td class="nr ${net>0?'pos':'neg'}">€${net.toLocaleString('it-IT')}</td>
+      <td><input type="number" class="fi" style="width:110px;font-size:12px;padding:5px 8px" placeholder="Actual €" value="${ac?.entrate||''}" onchange="salvaTeso(${b.m},${anno},this.value,'entrate')"></td>
+      <td style="font-size:16px;text-align:center">${sem}</td>
+    </tr>`;
+  }).join('');
+
+  c.innerHTML=`
+  <div class="kgrid" style="margin-bottom:18px">
+    <div class="kc r"><div class="kl">Cassa netta 31/12/25</div><div class="kv">-€ 208K</div><div class="ks">UC+ISP consolidato</div></div>
+    <div class="kc g"><div class="kl">Flusso 2026 stimato</div><div class="kv">+€ 3.745K</div><div class="ks">12 mesi pro-forma</div></div>
+    <div class="kc a"><div class="kl">Anticipo fatture</div><div class="kv">€ 461K</div><div class="ks">Da estinguere con mutuo</div></div>
+    <div class="kc b"><div class="kl">Linea factoring</div><div class="kv">€ 3,5M</div><div class="ks">UniCredit su Fincantieri</div></div>
+  </div>
+  <div class="card" style="padding:0;margin-bottom:18px">
+    <div style="padding:14px 18px 8px"><div class="ct">Flussi mensili ${anno} — inserisci actual (si salva nel database)</div></div>
+    <div class="tw"><table>
+      <thead><tr><th>Mese</th><th class="nr">Entrate budget</th><th class="nr">Uscite budget</th><th class="nr">Netto</th><th>Actual entrate €</th><th style="text-align:center">Sem</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table></div>
+  </div>`;
+}
+
+async function salvaTeso(mese, anno, val, campo){
+  const valore = parseFloat(val)||0;
+  setSyncStatus('salvataggio...', false);
+  await SB.from('tesoreria_actual').upsert(
+    { anno, mese, [campo]: valore, inserito_da: currentUser.email },
+    { onConflict: 'anno,mese' }
+  );
+  setSyncStatus('● Connesso', true);
+}
+
+// ══ KPI ══════════════════════════════════════════════════════════════════
+async function renderKpi(c){
+  loading(c);
+  const anno = new Date().getFullYear();
+  const mese = new Date().getMonth()+1;
+  const { data: actuals } = await SB.from('kpi_actual').select('*').eq('anno', anno).order('mese', {ascending:false});
+  const actMap = {};
+  (actuals||[]).forEach(r=>{ actMap[r.indicatore] = r; });
+
+  const kpis = [
+    {s:'Redditività',n:'Ricavi (€M)',    t26:9.5,  t27:10.5, t28:11.5, dir:1, soglia:5,  flusso:true,  fmt:v=>`€${v}M`},
+    {s:'Redditività',n:'EBITDA margin %',t26:11,   t27:12,   t28:13,   dir:1, soglia:3,  flusso:false, fmt:v=>`${v}%`},
+    {s:'Redditività',n:'Utile netto (€K)',t26:300, t27:400,  t28:550,  dir:1, soglia:15, flusso:true,  fmt:v=>`€${v}K`},
+    {s:'Liquidità',  n:'Cassa netta (€K)',t26:150, t27:250,  t28:400,  dir:1, soglia:20, flusso:false, fmt:v=>`€${v}K`},
+    {s:'Liquidità',  n:'DSO giorni',      t26:85,  t27:80,   t28:75,   dir:-1,soglia:10, flusso:false, fmt:v=>`${v}gg`},
+    {s:'Solidità',   n:'Leverage',        t26:1.2, t27:1.0,  t28:0.8,  dir:-1,soglia:20, flusso:false, fmt:v=>`${v}x`},
+    {s:'Solidità',   n:'Debiti tribut. (€K)',t26:680,t27:430,t28:180,  dir:-1,soglia:10, flusso:false, fmt:v=>`€${v}K`},
+    {s:'Personale',  n:'% Somministraz.', t26:45,  t27:40,   t28:35,   dir:-1,soglia:3,  flusso:false, fmt:v=>`${v}%`},
+    {s:'Personale',  n:'ULA t.ind.',      t26:60,  t27:65,   t28:68,   dir:1, soglia:10, flusso:false, fmt:v=>`${v}`},
+  ];
+
+  let prevSez='';
+  const rows = kpis.map((k,i)=>{
+    const bdata = k.flusso ? (k.t26/12*mese).toFixed(1) : k.t26;
+    const ac = actMap[k.n];
+    let sem='—';
+    if(ac){
+      const v=ac.valore, bd=parseFloat(bdata);
+      if(k.dir===1) sem=v>=bd?'✅':v>=bd*(1-k.soglia/100)?'⚠️':'🔴';
+      else           sem=v<=bd?'✅':v<=bd*(1+k.soglia/100)?'⚠️':'🔴';
+    }
+    const sezioneH = k.s!==prevSez ? (prevSez=k.s,
+      `<tr><td colspan="7" style="background:var(--blu);color:#fff;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;padding:7px 11px">${k.s}</td></tr>`):'';
+    return sezioneH+`<tr>
+      <td style="font-weight:600">${k.n}</td>
+      <td class="nr" style="color:var(--txt2)">${k.fmt(k.t26)}</td>
+      <td class="nr pos">${k.fmt(bdata)}</td>
+      <td><input type="number" class="fi" style="width:90px;font-size:12px;padding:5px 8px"
+        placeholder="Actual" value="${ac?.valore||''}"
+        onchange="salvaKpi('${k.n}',${anno},${mese},this.value)"></td>
+      <td style="font-size:16px;text-align:center" id="ksem-${i}">${sem}</td>
+      <td class="nr" style="color:var(--txt3)">${k.fmt(k.t27)}</td>
+      <td class="nr" style="color:var(--txt3)">${k.fmt(k.t28)}</td>
+    </tr>`;
+  }).join('');
+
+  c.innerHTML=`
+  <div class="alert ab" style="margin-bottom:18px">
+    Mese corrente: <strong>${mese}</strong> — il budget a data si proporziona automaticamente per gli indicatori di flusso. Inserisci l'actual e il semaforo si aggiorna nel database.
+  </div>
+  <div class="card" style="padding:0">
+    <div style="padding:14px 18px 8px"><div class="ct">KPI Piano Industriale 2026–2028</div></div>
+    <div class="tw"><table>
+      <thead><tr><th>Indicatore</th><th class="nr">Target 2026</th><th class="nr">Budget a data</th><th>Actual (inserisci)</th><th style="text-align:center">SEM</th><th class="nr">Target 2027</th><th class="nr">Target 2028</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table></div>
+  </div>`;
+}
+
+async function salvaKpi(nome, anno, mese, val){
+  const valore = parseFloat(val);
+  if(isNaN(valore)) return;
+  setSyncStatus('salvataggio...', false);
+  await SB.from('kpi_actual').upsert(
+    { anno, mese, indicatore: nome, valore, inserito_da: currentUser.email },
+    { onConflict: 'anno,mese,indicatore' }
+  );
+  setSyncStatus('● Connesso', true);
+}
+
+
+// ══ AMMINISTRAZIONE ANAGRAFICHE ══════════════════════════════════════════
+
+let adminTab = 'commesse'; // tab attiva
+
+function renderAdmin(c){
+  c.innerHTML = `
+  <div style="display:flex;gap:0;margin-bottom:20px;border:1px solid var(--border);border-radius:10px;overflow:hidden;background:#fff">
+    ${['commesse','risorse','cantieri','utenti'].map(t=>`
+    <button onclick="setAdminTab('${t}')" id="atab-${t}"
+      style="flex:1;padding:11px 8px;border:none;font-size:13px;font-weight:600;cursor:pointer;
+             background:${t===adminTab?'var(--blu)':'#fff'};
+             color:${t===adminTab?'#fff':'var(--txt2)'};
+             border-right:1px solid var(--border);transition:all .2s;text-transform:capitalize">
+      ${t.charAt(0).toUpperCase()+t.slice(1)}
+    </button>`).join('')}
+  </div>
+  <div id="admin-content"></div>`;
+  loadAdminTab(adminTab);
+}
+
+function setAdminTab(t){
+  adminTab = t;
+  document.querySelectorAll('[id^="atab-"]').forEach(b=>{
+    const active = b.id === `atab-${t}`;
+    b.style.background = active ? 'var(--blu)' : '#fff';
+    b.style.color = active ? '#fff' : 'var(--txt2)';
+  });
+  loadAdminTab(t);
+}
+
+async function loadAdminTab(t){
+  const c = document.getElementById('admin-content');
+  if(!c) return;
+  if(t==='commesse')  await adminCommesse(c);
+  else if(t==='risorse')   await adminRisorse(c);
+  else if(t==='cantieri')  await adminCantieri(c);
+  else if(t==='utenti')    await adminUtenti(c);
+}
+
+// ─── COMMESSE CRUD ────────────────────────────────────────────────────────
+async function adminCommesse(c){
+  c.innerHTML = '<div class="empty"><div class="spin"></div> Caricamento...</div>';
+  const { data, error } = await SB.from('commesse').select('*').order('codice');
+  if(error){ c.innerHTML=`<div class="alert ar">Errore: ${error.message}</div>`; return; }
+
+  c.innerHTML = `
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+    <strong style="font-size:16px;color:var(--blu)">${data.length} commesse</strong>
+    <button class="btn bp bsm" onclick="formCommessa(null)">+ Nuova commessa</button>
+  </div>
+  <div id="form-zona"></div>
+  <div class="card" style="padding:0">
+    <div class="tw"><table>
+      <thead><tr><th>Codice</th><th>Descrizione</th><th>Cliente</th><th>Cantiere</th><th>Stato</th><th class="nr">Ricavo €</th><th class="nr">Budget €</th><th class="nr">Avanz.</th><th>Azioni</th></tr></thead>
+      <tbody>${data.map(x=>`<tr>
+        <td><strong>${x.codice}</strong></td>
+        <td style="max-width:200px;white-space:normal;font-size:12px">${x.descrizione}</td>
+        <td style="font-size:12px">${x.cliente}</td>
+        <td style="font-size:12px">${x.cantiere}</td>
+        <td><span class="pill ${x.stato==='In corso'?'pb':x.stato==='Avvio'?'pa':x.stato==='Chiusa'?'pg':'pgr'}">${x.stato}</span></td>
+        <td class="nr">€${(x.ricavo||0).toLocaleString('it-IT')}</td>
+        <td class="nr">€${(x.costo_budget||0).toLocaleString('it-IT')}</td>
+        <td class="nr">${x.avanzamento}%</td>
+        <td style="white-space:nowrap">
+          <button class="btn bo bsm" onclick='formCommessa(${JSON.stringify(x).replace(/'/g,"&#39;")})' style="margin-right:4px">✏️</button>
+          <button class="btn bsm" style="background:var(--lred);color:var(--red);border:none" onclick="delCommessa('${x.id}','${x.codice}')">🗑️</button>
+        </td>
+      </tr>`).join('')}</tbody>
+    </table></div>
+  </div>`;
+}
+
+function formCommessa(x){
+  const isNew = !x;
+  const html = `
+  <div class="card" style="margin-bottom:16px;border:2px solid var(--blu2)">
+    <div class="ct" style="margin-bottom:16px">${isNew?'➕ Nuova commessa':'✏️ Modifica commessa — '+x.codice}</div>
+    <div class="fr2">
+      <div class="fg"><label class="fl">Codice</label><input class="fi" id="fc-cod" value="${isNew?'':x.codice}" ${isNew?'':'readonly style="background:var(--gray)"}></div>
+      <div class="fg"><label class="fl">Stato</label>
+        <select class="fs" id="fc-stato">
+          ${['Avvio','In corso','Sospesa','Chiusa'].map(s=>`<option ${(!isNew&&x.stato===s)?'selected':''}>${s}</option>`).join('')}
+        </select>
+      </div>
+    </div>
+    <div class="fg"><label class="fl">Descrizione</label><input class="fi" id="fc-desc" value="${isNew?'':x.descrizione}"></div>
+    <div class="fr2">
+      <div class="fg"><label class="fl">Cliente</label><input class="fi" id="fc-cli" value="${isNew?'':x.cliente}"></div>
+      <div class="fg"><label class="fl">Cantiere</label><input class="fi" id="fc-cant" value="${isNew?'':x.cantiere}"></div>
+    </div>
+    <div class="fr2">
+      <div class="fg"><label class="fl">Ricavo € (budget)</label><input type="number" class="fi" id="fc-ric" value="${isNew?0:x.ricavo}"></div>
+      <div class="fg"><label class="fl">Costo budget €</label><input type="number" class="fi" id="fc-cost" value="${isNew?0:x.costo_budget}"></div>
+    </div>
+    <div class="fr2">
+      <div class="fg"><label class="fl">Data inizio</label><input type="date" class="fi" id="fc-ini" value="${isNew?'':x.data_inizio||''}"></div>
+      <div class="fg"><label class="fl">Data fine prevista</label><input type="date" class="fi" id="fc-fine" value="${isNew?'':x.data_fine||''}"></div>
+    </div>
+    <div class="fg"><label class="fl">Avanzamento %</label><input type="number" class="fi" id="fc-avanz" min="0" max="100" value="${isNew?0:x.avanzamento}"></div>
+    <div class="fg"><label class="fl">Note</label><textarea class="ft" id="fc-note">${isNew?'':x.note||''}</textarea></div>
+    <div style="display:flex;gap:10px;margin-top:4px">
+      <button class="btn bp" onclick="salvaCommessa(${isNew?'null':`'${x.id}'`})">💾 Salva</button>
+      <button class="btn bo" onclick="loadAdminTab('commesse')">Annulla</button>
+    </div>
+  </div>`;
+  document.getElementById('form-zona').innerHTML = html;
+  document.getElementById('form-zona').scrollIntoView({behavior:'smooth'});
+}
+
+async function salvaCommessa(id){
+  const dati = {
+    codice:       document.getElementById('fc-cod').value.trim(),
+    descrizione:  document.getElementById('fc-desc').value.trim(),
+    cliente:      document.getElementById('fc-cli').value.trim(),
+    cantiere:     document.getElementById('fc-cant').value.trim(),
+    stato:        document.getElementById('fc-stato').value,
+    ricavo:       parseFloat(document.getElementById('fc-ric').value)||0,
+    costo_budget: parseFloat(document.getElementById('fc-cost').value)||0,
+    data_inizio:  document.getElementById('fc-ini').value||null,
+    data_fine:    document.getElementById('fc-fine').value||null,
+    avanzamento:  parseInt(document.getElementById('fc-avanz').value)||0,
+    note:         document.getElementById('fc-note').value.trim()||null,
+    updated_at:   new Date().toISOString(),
+  };
+  if(!dati.codice||!dati.descrizione||!dati.cliente){ alert('Codice, descrizione e cliente sono obbligatori.'); return; }
+  setSyncStatus('salvataggio...', false);
+  let err;
+  if(!id){
+    const r = await SB.from('commesse').insert(dati);
+    err = r.error;
+  } else {
+    const r = await SB.from('commesse').update(dati).eq('id', id);
+    err = r.error;
+  }
+  if(err){ alert('Errore: '+err.message); setSyncStatus('● Errore',false); return; }
+  await loadCache();
+  setSyncStatus('● Connesso', true);
+  await adminCommesse(document.getElementById('admin-content'));
+}
+
+async function delCommessa(id, cod){
+  if(!confirm(`Eliminare definitivamente la commessa ${cod}?\n\nAttenzione: verranno eliminati anche tutti i rapportini collegati.`)) return;
+  setSyncStatus('eliminazione...', false);
+  const { error } = await SB.from('commesse').delete().eq('id', id);
+  if(error){ alert('Errore: '+error.message); setSyncStatus('● Errore',false); return; }
+  await loadCache();
+  setSyncStatus('● Connesso', true);
+  await adminCommesse(document.getElementById('admin-content'));
+}
+
+// ─── RISORSE CRUD ────────────────────────────────────────────────────────
+async function adminRisorse(c){
+  c.innerHTML = '<div class="empty"><div class="spin"></div> Caricamento...</div>';
+  const { data, error } = await SB.from('risorse').select('*').order('nominativo');
+  if(error){ c.innerHTML=`<div class="alert ar">Errore: ${error.message}</div>`; return; }
+
+  c.innerHTML = `
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+    <strong style="font-size:16px;color:var(--blu)">${data.length} risorse</strong>
+    <button class="btn bp bsm" onclick="formRisorsa(null)">+ Nuova risorsa</button>
+  </div>
+  <div id="form-zona"></div>
+  <div class="card" style="padding:0">
+    <div class="tw"><table>
+      <thead><tr><th>Nominativo</th><th>Qualifica</th><th>Tipo</th><th class="nr">Costo ord. €/ora</th><th class="nr">Str. 30% €/ora</th><th class="nr">Str. 50% €/ora</th><th>Attivo</th><th>Azioni</th></tr></thead>
+      <tbody>${data.map(x=>`<tr>
+        <td><strong>${x.nominativo}</strong></td>
+        <td>${x.qualifica}</td>
+        <td><span class="pill ${x.tipo==='Diretto'?'pg':'pa'}">${x.tipo}</span></td>
+        <td class="nr">€ ${(x.costo_ord||0).toFixed(2)}</td>
+        <td class="nr" style="color:var(--yel)">€ ${((x.costo_ord||0)*1.30).toFixed(2)}</td>
+        <td class="nr" style="color:var(--red)">€ ${((x.costo_ord||0)*1.50).toFixed(2)}</td>
+        <td><span class="pill ${x.attivo?'pg':'pr'}">${x.attivo?'Sì':'No'}</span></td>
+        <td style="white-space:nowrap">
+          <button class="btn bo bsm" onclick='formRisorsa(${JSON.stringify(x).replace(/'/g,"&#39;")})' style="margin-right:4px">✏️</button>
+          <button class="btn bsm" style="background:var(--lred);color:var(--red);border:none" onclick="delRisorsa('${x.id}','${x.nominativo}')">🗑️</button>
+        </td>
+      </tr>`).join('')}</tbody>
+    </table></div>
+  </div>`;
+}
+
+function formRisorsa(x){
+  const isNew = !x;
+  const html = `
+  <div class="card" style="margin-bottom:16px;border:2px solid var(--blu2)">
+    <div class="ct" style="margin-bottom:16px">${isNew?'➕ Nuova risorsa':'✏️ Modifica — '+x.nominativo}</div>
+    <div class="fr2">
+      <div class="fg"><label class="fl">Nominativo</label><input class="fi" id="fr-nom" value="${isNew?'':x.nominativo}"></div>
+      <div class="fg"><label class="fl">Qualifica</label><input class="fi" id="fr-qual" value="${isNew?'':x.qualifica}" placeholder="es. Saldatore 1°, Tubista..."></div>
+    </div>
+    <div class="fr2">
+      <div class="fg"><label class="fl">Tipo</label>
+        <select class="fs" id="fr-tipo">
+          <option ${(!isNew&&x.tipo==='Diretto')?'selected':''}>Diretto</option>
+          <option ${(!isNew&&x.tipo==='Somministrazione')?'selected':''}>Somministrazione</option>
+        </select>
+      </div>
+      <div class="fg"><label class="fl">Costo ordinario €/ora</label>
+        <input type="number" class="fi" id="fr-cost" step="0.50" min="0" value="${isNew?0:x.costo_ord}" oninput="aggiornaCostiStr()">
+      </div>
+    </div>
+    <div style="background:var(--gray);border-radius:8px;padding:12px 14px;margin-bottom:14px;font-size:13px">
+      <strong>Costi straordinari CCNL Metalmeccanica (calcolati automaticamente):</strong><br>
+      Str. +30%: <span id="costo30" style="color:var(--yel);font-weight:700">€ 0,00</span>/ora &nbsp;|&nbsp;
+      Str. +50%: <span id="costo50" style="color:var(--red);font-weight:700">€ 0,00</span>/ora
+    </div>
+    <div class="fg">
+      <label class="fl">Attivo</label>
+      <select class="fs" id="fr-att">
+        <option value="true" ${(isNew||x.attivo)?'selected':''}>Sì</option>
+        <option value="false" ${(!isNew&&!x.attivo)?'selected':''}>No</option>
+      </select>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:4px">
+      <button class="btn bp" onclick="salvaRisorsa(${isNew?'null':`'${x.id}'`})">💾 Salva</button>
+      <button class="btn bo" onclick="loadAdminTab('risorse')">Annulla</button>
+    </div>
+  </div>`;
+  document.getElementById('form-zona').innerHTML = html;
+  aggiornaCostiStr();
+  document.getElementById('form-zona').scrollIntoView({behavior:'smooth'});
+}
+
+function aggiornaCostiStr(){
+  const base = parseFloat(document.getElementById('fr-cost')?.value)||0;
+  const el30 = document.getElementById('costo30');
+  const el50 = document.getElementById('costo50');
+  if(el30) el30.textContent = `€ ${(base*1.30).toFixed(2)}`;
+  if(el50) el50.textContent = `€ ${(base*1.50).toFixed(2)}`;
+}
+
+async function salvaRisorsa(id){
+  const dati = {
+    nominativo: document.getElementById('fr-nom').value.trim(),
+    qualifica:  document.getElementById('fr-qual').value.trim(),
+    tipo:       document.getElementById('fr-tipo').value,
+    costo_ord:  parseFloat(document.getElementById('fr-cost').value)||0,
+    attivo:     document.getElementById('fr-att').value === 'true',
+  };
+  if(!dati.nominativo||!dati.qualifica){ alert('Nominativo e qualifica obbligatori.'); return; }
+  setSyncStatus('salvataggio...', false);
+  const r = !id ? await SB.from('risorse').insert(dati) : await SB.from('risorse').update(dati).eq('id', id);
+  if(r.error){ alert('Errore: '+r.error.message); setSyncStatus('● Errore',false); return; }
+  await loadCache();
+  setSyncStatus('● Connesso', true);
+  await adminRisorse(document.getElementById('admin-content'));
+}
+
+async function delRisorsa(id, nome){
+  if(!confirm(`Eliminare la risorsa "${nome}"?\n\nI rapportini già salvati non vengono modificati.`)) return;
+  setSyncStatus('eliminazione...', false);
+  const { error } = await SB.from('risorse').delete().eq('id', id);
+  if(error){ alert('Errore: '+error.message); setSyncStatus('● Errore',false); return; }
+  await loadCache();
+  setSyncStatus('● Connesso', true);
+  await adminRisorse(document.getElementById('admin-content'));
+}
+
+// ─── CANTIERI (lista unica dai cantieri delle commesse) ───────────────────
+async function adminCantieri(c){
+  c.innerHTML = '<div class="empty"><div class="spin"></div> Caricamento...</div>';
+  const { data: comm } = await SB.from('commesse').select('cantiere,codice,cliente,stato').order('cantiere');
+  const cantMap = {};
+  (comm||[]).forEach(x=>{
+    if(!cantMap[x.cantiere]) cantMap[x.cantiere] = [];
+    cantMap[x.cantiere].push(x);
+  });
+  const cantieri = Object.entries(cantMap);
+
+  c.innerHTML = `
+  <div class="alert ab" style="margin-bottom:16px">
+    I cantieri sono ricavati dalle commesse. Per aggiungere un nuovo cantiere, crea una commessa con il nome del cantiere desiderato.
+  </div>
+  <div class="kgrid">
+    ${cantieri.map(([cant, comms])=>`
+    <div class="card">
+      <div style="font-size:15px;font-weight:700;color:var(--blu);margin-bottom:8px">📍 ${cant}</div>
+      <div style="font-size:12px;color:var(--txt2);margin-bottom:10px">${comms.length} commess${comms.length===1?'a':'e'} attiv${comms.length===1?'a':'e'}</div>
+      ${comms.map(x=>`<div style="padding:6px 0;border-bottom:1px solid var(--border);font-size:12px">
+        <span class="pill ${x.stato==='In corso'?'pb':x.stato==='Avvio'?'pa':'pgr'}" style="font-size:10px">${x.stato}</span>
+        <strong style="margin-left:6px">${x.codice}</strong><br>
+        <span style="color:var(--txt3)">${x.cliente}</span>
+      </div>`).join('')}
+    </div>`).join('')}
+  </div>
+  <div class="card" style="margin-top:20px">
+    <div class="ct">Sposta commessa a nuovo cantiere</div>
+    <div class="fr2">
+      <div class="fg"><label class="fl">Commessa</label>
+        <select class="fs" id="cant-comm">
+          ${(comm||[]).map(x=>`<option value="${x.codice}">${x.codice} — ${x.cantiere}</option>`).join('')}
+        </select>
+      </div>
+      <div class="fg"><label class="fl">Nuovo cantiere</label>
+        <input class="fi" id="cant-nuovo" list="cant-list" placeholder="Nome cantiere">
+        <datalist id="cant-list">${cantieri.map(([k])=>`<option>${k}</option>`).join('')}</datalist>
+      </div>
+    </div>
+    <button class="btn bp bsm" onclick="spostaCommessaCantiere()">Aggiorna cantiere</button>
+  </div>`;
+}
+
+async function spostaCommessaCantiere(){
+  const cod   = document.getElementById('cant-comm')?.value;
+  const nuovo = document.getElementById('cant-nuovo')?.value.trim();
+  if(!cod||!nuovo){ alert('Seleziona commessa e inserisci il nuovo cantiere.'); return; }
+  setSyncStatus('salvataggio...', false);
+  const { error } = await SB.from('commesse').update({ cantiere: nuovo, updated_at: new Date().toISOString() }).eq('codice', cod);
+  if(error){ alert('Errore: '+error.message); setSyncStatus('● Errore',false); return; }
+  await loadCache();
+  setSyncStatus('● Connesso', true);
+  await adminCantieri(document.getElementById('admin-content'));
+}
+
+// ─── UTENTI ──────────────────────────────────────────────────────────────
+async function adminUtenti(c){
+  c.innerHTML = '<div class="empty"><div class="spin"></div> Caricamento...</div>';
+  const { data, error } = await SB.from('profili').select('*').order('ruolo');
+  if(error){ c.innerHTML=`<div class="alert ar">Errore: ${error.message}</div>`; return; }
+
+  const PASS_HINTS = {
+    'direzione@dimasrl.it':'dima2026',
+    'cantiere@dimasrl.it':'cantiere1',
+    'admin@dimasrl.it':'admin123',
+    'commercialista@dimasrl.it':'acunzo2026'
+  };
+
+  c.innerHTML = `
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+    <strong style="font-size:16px;color:var(--blu)">${data.length} utenti</strong>
+    <button class="btn bp bsm" onclick="formUtente(null)">+ Nuovo utente</button>
+  </div>
+  <div id="form-zona"></div>
+  <div class="card" style="padding:0">
+    <div class="tw"><table>
+      <thead><tr><th>Email</th><th>Nome</th><th>Ruolo</th><th>Iniziali</th><th>Attivo</th><th>Password app</th><th>Azioni</th></tr></thead>
+      <tbody>${data.map(x=>`<tr>
+        <td style="font-size:12px">${x.email}</td>
+        <td><strong>${x.nome}</strong></td>
+        <td><span class="pill ${x.ruolo==='direzione'?'pb':x.ruolo==='cantiere'?'pg':x.ruolo==='commercialista'?'pa':'pgr'}">${x.ruolo}</span></td>
+        <td style="text-align:center"><div style="width:32px;height:32px;border-radius:50%;background:var(--lblu);display:inline-flex;align-items:center;justify-content:center;font-weight:700;color:var(--blu)">${x.iniziali}</div></td>
+        <td><span class="pill ${x.attivo?'pg':'pr'}">${x.attivo?'Sì':'No'}</span></td>
+        <td><code style="background:var(--gray);padding:3px 8px;border-radius:4px;font-size:12px">${PASS_HINTS[x.email]||'—'}</code></td>
+        <td style="white-space:nowrap">
+          <button class="btn bo bsm" onclick='formUtente(${JSON.stringify(x).replace(/'/g,"&#39;")})' style="margin-right:4px">✏️</button>
+          <button class="btn bsm" style="background:var(--lred);color:var(--red);border:none" onclick="delUtente('${x.id}','${x.nome}')">🗑️</button>
+        </td>
+      </tr>`).join('')}</tbody>
+    </table></div>
+  </div>
+  <div class="alert ab" style="margin-top:16px">
+    Le password sono gestite nel codice della app (file HTML). Per cambiarle invia il file aggiornato agli utenti. In una futura versione saranno gestite tramite Supabase Auth.
+  </div>`;
+}
+
+function formUtente(x){
+  const isNew = !x;
+  const html = `
+  <div class="card" style="margin-bottom:16px;border:2px solid var(--blu2)">
+    <div class="ct" style="margin-bottom:16px">${isNew?'➕ Nuovo utente':'✏️ Modifica — '+x.nome}</div>
+    <div class="fr2">
+      <div class="fg"><label class="fl">Nome</label><input class="fi" id="fu-nom" value="${isNew?'':x.nome}"></div>
+      <div class="fg"><label class="fl">Email</label><input type="email" class="fi" id="fu-email" value="${isNew?'':x.email}" ${!isNew?'readonly style="background:var(--gray)"':''}></div>
+    </div>
+    <div class="fr2">
+      <div class="fg"><label class="fl">Ruolo</label>
+        <select class="fs" id="fu-ruolo">
+          ${['direzione','cantiere','amministrazione','commercialista'].map(r=>`<option ${(!isNew&&x.ruolo===r)?'selected':''}>${r}</option>`).join('')}
+        </select>
+      </div>
+      <div class="fg"><label class="fl">Iniziali (2-3 lettere)</label><input class="fi" id="fu-ini" maxlength="3" value="${isNew?'':x.iniziali}" style="text-transform:uppercase"></div>
+    </div>
+    <div class="fg"><label class="fl">Attivo</label>
+      <select class="fs" id="fu-att">
+        <option value="true" ${(isNew||x.attivo)?'selected':''}>Sì</option>
+        <option value="false" ${(!isNew&&!x.attivo)?'selected':''}>No</option>
+      </select>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:4px">
+      <button class="btn bp" onclick="salvaUtente(${isNew?'null':`'${x.id}'`})">💾 Salva</button>
+      <button class="btn bo" onclick="loadAdminTab('utenti')">Annulla</button>
+    </div>
+  </div>`;
+  document.getElementById('form-zona').innerHTML = html;
+  document.getElementById('form-zona').scrollIntoView({behavior:'smooth'});
+}
+
+async function salvaUtente(id){
+  const dati = {
+    nome:     document.getElementById('fu-nom').value.trim(),
+    email:    document.getElementById('fu-email').value.trim().toLowerCase(),
+    ruolo:    document.getElementById('fu-ruolo').value,
+    iniziali: document.getElementById('fu-ini').value.trim().toUpperCase(),
+    attivo:   document.getElementById('fu-att').value === 'true',
+  };
+  if(!dati.nome||!dati.email||!dati.iniziali){ alert('Nome, email e iniziali obbligatori.'); return; }
+  setSyncStatus('salvataggio...', false);
+  const r = !id ? await SB.from('profili').insert(dati) : await SB.from('profili').update(dati).eq('id', id);
+  if(r.error){ alert('Errore: '+r.error.message); setSyncStatus('● Errore',false); return; }
+  setSyncStatus('● Connesso', true);
+  await adminUtenti(document.getElementById('admin-content'));
+}
+
+async function delUtente(id, nome){
+  if(!confirm(`Eliminare l'utente "${nome}"?\nL'utente non potrà più accedere alla app.`)) return;
+  setSyncStatus('eliminazione...', false);
+  const { error } = await SB.from('profili').delete().eq('id', id);
+  if(error){ alert('Errore: '+error.message); setSyncStatus('● Errore',false); return; }
+  setSyncStatus('● Connesso', true);
+  await adminUtenti(document.getElementById('admin-content'));
+}
+
+
+// ── AVVIO ─────────────────────────────────────────────────────────────────
+// Diagnostica avvio
+function setPreload(msg, ok){
+  const el = document.getElementById('preload-status');
+  if(el){ el.textContent = msg; el.style.background = ok ? 'rgba(112,173,71,.3)' : 'rgba(255,255,255,.1)'; }
+}
+function hidePreload(){
+  const el = document.getElementById('preload');
+  if(el) el.style.display = 'none';
+}
+
+// Wrappa initApp con diagnostica
+const _origInitApp = initApp;
+initApp = async function(){
+  setPreload('Verifica connessione Supabase...', false);
+  try {
+    await _origInitApp();
+  } catch(e) {
+    setPreload('Errore: ' + e.message, false);
+    console.error('initApp error:', e);
+  }
+};
+
+// Wrappa showLogin per nascondere il preloader
+const _origShowLogin = showLogin;
+showLogin = function(){
+  hidePreload();
+  _origShowLogin();
+};
+
+initApp();
+</script>
+</body>
+</html>
