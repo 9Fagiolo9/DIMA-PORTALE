@@ -71,6 +71,76 @@ tr:hover td{background:#F8FAFC}
 .spin{display:inline-block;width:16px;height:16px;border:2px solid #DEE2E8;border-top-color:#2E74B5;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-3px;margin-right:8px}
 @keyframes sp{to{transform:rotate(360deg)}}
 .empty{text-align:center;padding:40px;color:#94A3B8}
+/* Modulo Produttività */
+.pr{background:#FFE0E0;color:#C00000}
+.prod-bar{display:grid;grid-template-columns:1fr 1fr 2fr auto;gap:10px;padding:12px}
+.prod-sub{font-size:11px;color:#94A3B8}
+.prod-mini{padding:4px 9px;font-size:11px}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.prod-selrow td{background:#EBF3FB!important}
+.prod-det{border:2px solid #2E74B5}
+.prod-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.prod-grid{display:grid;grid-template-columns:230px 1fr;gap:20px;align-items:start}
+.prod-ring{display:flex;flex-direction:column;align-items:center}
+.prod-leg{display:flex;flex-direction:column;gap:3px;font-size:11px;color:#64748B;margin-top:6px}
+.prod-leg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.prod-nums{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#DEE2E8;border:1px solid #DEE2E8;border-radius:10px;overflow:hidden}
+.prod-nums>div{background:#fff;padding:10px 12px}
+.prod-nums>div>span{display:block;font-size:11px;color:#64748B;font-weight:600}
+.prod-nums b{display:block;font-size:19px;color:#1F3864;margin-top:2px}
+.prod-nums em{display:block;font-style:normal;font-size:11px;color:#94A3B8;margin-top:2px}
+.prod-par{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;margin-top:14px;padding:12px;background:#F5F7FA;border-radius:10px}
+.prod-par .fg{margin-bottom:0}
+.prod-note{font-size:11px;color:#64748B;line-height:1.5;max-width:900px;margin:4px 2px 20px}
+.prod-sql{background:#1A1A2E;color:#E2EFDA;padding:10px;border-radius:6px;margin-top:8px;font-size:11px;white-space:pre-wrap;user-select:all}
+.fi:focus-visible,.fs:focus-visible,.btn:focus-visible{outline:2px solid #2E74B5;outline-offset:2px}
+@media(max-width:800px){.prod-grid{grid-template-columns:1fr}.prod-nums{grid-template-columns:1fr 1fr}.prod-nums>div:last-child{grid-column:span 2}.prod-par{grid-template-columns:1fr}.prod-bar{grid-template-columns:1fr 1fr}}
+/* Microaree */
+.ma-top{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.ma-tabs{display:flex;border:1px solid #DEE2E8;border-radius:8px;overflow:hidden;background:#fff}
+.ma-tabs button{border:none;background:#fff;color:#64748B;padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer}
+.ma-tabs button.on{background:#1F3864;color:#fff}
+.ma-empty p{max-width:640px;line-height:1.55;color:#475569}
+.ma-scroll{overflow:auto;max-height:72vh}
+.ma-mx{border-collapse:separate;border-spacing:0}
+.ma-mx th{position:sticky;top:0;z-index:2;vertical-align:bottom}
+.ma-mx .ma-st{position:sticky;left:0;z-index:1;background:#fff;min-width:190px;border-right:1px solid #DEE2E8}
+.ma-mx th.ma-st{z-index:3;background:#1F3864}
+.ma-mx tfoot td{background:#EBF3FB;border-top:2px solid #1F3864;vertical-align:top;font-size:12px}
+.ma-mx tfoot .ma-st{background:#EBF3FB;font-weight:700;color:#1F3864}
+.ma-fh{min-width:108px;text-align:center!important;line-height:1.25}
+.ma-fh span{display:block;font-weight:400;font-size:10px;opacity:.75;margin-top:2px}
+.ma-c{padding:3px!important;text-align:center}
+.ma-c>button,.ma-c>div{position:relative;width:100%;min-height:46px;border:1px solid #DEE2E8;border-radius:6px;background:#fff;cursor:pointer;font-family:inherit;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px}
+.ma-c>div{cursor:default}
+.ma-c b{font-size:14px;color:#1F3864;position:relative;z-index:1}
+.ma-c span{font-size:10px;color:#64748B;position:relative;z-index:1}
+.ma-c i{position:absolute;left:0;bottom:0;height:4px;background:#2E74B5}
+.ma-c em{position:absolute;top:2px;right:5px;font-style:normal;font-size:11px;font-weight:700;color:#C00000}
+.ma-c>button:hover{border-color:#2E74B5;box-shadow:0 0 0 2px #D6E4F0}
+.ma-p>button,.ma-p>div{background:#EBF3FB;border-color:#B7D0E8}
+.ma-ok>button,.ma-ok>div{background:#E2EFDA;border-color:#A9D18E}
+.ma-ok b{color:#375623}
+.ma-w>button,.ma-w>div{border:2px solid #F59E0B;background:#FFFBEB}
+.ma-na{color:#CBD5E1;background:repeating-linear-gradient(45deg,#F8FAFC,#F8FAFC 5px,#F1F5F9 5px,#F1F5F9 10px)}
+.ma-tot{font-weight:600;color:#1F3864;white-space:nowrap}
+.ma-ft b{display:block;font-size:14px;color:#1F3864}.ma-ft span{display:block;color:#64748B;font-size:10.5px}
+.ma-leg{display:flex;flex-wrap:wrap;gap:14px;font-size:11px;color:#64748B;margin:-6px 2px 18px;align-items:center}
+.ma-leg i{display:inline-block;width:14px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-2px;border:1px solid #DEE2E8}
+.ma-leg .lp{background:#EBF3FB;border-color:#B7D0E8}.ma-leg .lok{background:#E2EFDA;border-color:#A9D18E}.ma-leg .lw{background:#FFFBEB;border:2px solid #F59E0B}.ma-leg .lna{background:repeating-linear-gradient(45deg,#F8FAFC,#F8FAFC 3px,#E2E8F0 3px,#E2E8F0 6px)}
+.ma-ovl{position:fixed;inset:0;background:rgba(15,23,42,.45);display:flex;align-items:center;justify-content:center;z-index:50;padding:14px}
+.ma-mod{background:#fff;border-radius:12px;padding:20px;width:440px;max-width:100%;max-height:92vh;overflow:auto}
+.ma-wide{width:860px}
+.ma-q{display:flex;gap:6px;flex-wrap:wrap}.ma-q .btn{padding:7px 11px;font-size:12px}
+.ma-memo{background:#F5F7FA;border-radius:8px;padding:10px 12px;margin-bottom:12px}.ma-memo .fg{margin-bottom:0}
+.ma-info{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#DEE2E8;border:1px solid #DEE2E8;border-radius:8px;overflow:hidden}
+.ma-info div{background:#fff;padding:7px 9px}.ma-info span{display:block;font-size:10px;color:#64748B}.ma-info b{font-size:15px;color:#1F3864}
+.ma-ed td{padding:5px 6px}.ma-ed .fi,.ma-ed .fs{padding:6px 8px;font-size:12px}
+.ma-add{display:flex;gap:8px;margin-top:10px}
+.ma-chk{width:18px;height:18px;cursor:pointer;accent-color:#1F3864}
+.ma-danger{display:flex;justify-content:space-between;align-items:center;gap:12px;border-color:#F3C4C4}
+.ma-st2>.card{margin-bottom:16px}
+@media(max-width:800px){.ma-st2{grid-template-columns:1fr}.ma-info{grid-template-columns:1fr 1fr}.ma-mx .ma-st{min-width:130px}.ma-add{flex-wrap:wrap}}
 @media(max-width:600px){.fr2{grid-template-columns:1fr}.kg{grid-template-columns:1fr 1fr}}
 </style>
 </head>
@@ -101,6 +171,7 @@ tr:hover td{background:#F8FAFC}
     <div class="nav-item" onclick="go('comm')">Commesse</div>
     <div class="nav-item" onclick="go('rap')">Rapportino</div>
     <div class="nav-item" onclick="go('stor')">Storico</div>
+    <div class="nav-item" onclick="go('prod')" id="nav-prod" style="display:none">Produttività</div>
     <div class="nav-item" onclick="go('fin')">Finanziario</div>
     <div class="nav-item" onclick="go('kpi')">KPI</div>
     <div class="nav-item" onclick="go('adm')" id="nav-adm" style="display:none">Admin</div>
@@ -124,9 +195,9 @@ async function sb(table, qs, method, body){
 }
 
 const USERS = {
-  "direzione@dimasrl.it":  {pass:"dima2026",   nome:"Direzione",       ruolo:"direzione",       pages:["dash","comm","rap","stor","fin","kpi","adm"]},
+  "direzione@dimasrl.it":  {pass:"dima2026",   nome:"Direzione",       ruolo:"direzione",       pages:["dash","comm","rap","stor","prod","fin","kpi","adm"]},
   "cantiere@dimasrl.it":   {pass:"cantiere1",   nome:"Capo Cantiere",   ruolo:"cantiere",        pages:["rap","comm","stor"]},
-  "admin@dimasrl.it":      {pass:"admin123",    nome:"Amministrazione", ruolo:"amministrazione", pages:["dash","fin","kpi","stor"]},
+  "admin@dimasrl.it":      {pass:"admin123",    nome:"Amministrazione", ruolo:"amministrazione", pages:["dash","fin","kpi","stor","prod"]},
 };
 
 let CU = null, cache = {commesse:[], risorse:[]};
@@ -142,6 +213,7 @@ async function login(){
   document.getElementById("app").style.display="block";
   document.getElementById("tb-user").textContent = u.nome+" ("+u.ruolo+")";
   if(u.ruolo==="direzione") document.getElementById("nav-adm").style.display="block";
+  document.getElementById("nav-prod").style.display = u.pages.includes("prod") ? "block" : "none";
   await loadCache();
   go(u.pages[0]);
 }
@@ -178,7 +250,7 @@ function go(p){
   document.querySelectorAll(".nav-item").forEach(n=>{ if(n.getAttribute("onclick")&&n.getAttribute("onclick").includes("'"+p+"'")) n.classList.add("active"); });
   const c = document.getElementById("content");
   c.scrollTop = 0;
-  const pages = {dash:pgDash, comm:pgComm, rap:pgRap, stor:pgStor, fin:pgFin, kpi:pgKpi, adm:pgAdm};
+  const pages = {dash:pgDash, comm:pgComm, rap:pgRap, stor:pgStor, prod:pgProd, fin:pgFin, kpi:pgKpi, adm:pgAdm};
   if(pages[p]) pages[p](c);
   else c.innerHTML = "<div class='empty'>Pagina in costruzione.</div>";
 }
@@ -220,7 +292,7 @@ function pgComm(c){
       '<td class="nr">€'+(x.ricavo||0).toLocaleString("it-IT")+'</td>' +
       '<td class="nr pos">€'+m.toLocaleString("it-IT")+'</td>' +
       '<td style="min-width:80px"><div class="prog"><div class="pbr '+(x.avanzamento>70?"pbg":x.avanzamento>40?"pbb":"pba")+'" style="width:'+x.avanzamento+'%"></div></div><span style="font-size:11px">'+x.avanzamento+'%</span></td>' +
-      '<td><button class="btn bp" style="padding:5px 10px;font-size:11px" onclick="aggAvanz(\''+x.id+'\',\''+x.codice+'\','+x.avanzamento+')">Agg.</button></td></tr>';
+      '<td><button class="btn bp" style="padding:5px 10px;font-size:11px" onclick="aggAvanz(\''+x.id+'\',\''+x.codice+'\','+x.avanzamento+')">Agg.</button> <button class="btn bo" style="padding:5px 10px;font-size:11px" onclick="pgMicro(\''+x.id+'\',\'av\',\'comm\')">Microaree</button></td></tr>';
   }).join("");
   const tR = comm.reduce((a,x)=>a+(x.ricavo||0),0);
   const tM = comm.reduce((a,x)=>a+(x.ricavo||0)-(x.costo_budget||0),0);
@@ -261,8 +333,9 @@ function pgRap(c){
     '<div class="fg"><label class="fl">Caposquadra</label><input class="fi" id="rcp" value="'+(CU?CU.nome:"")+'"></div></div>' +
     '</div>' +
     '<div class="card"><div class="card-title">Presenze e ore</div>' +
-    '<div style="overflow-x:auto"><table><thead><tr><th style="min-width:140px">Risorsa</th><th>Ore ord.</th><th>Ore str.</th><th>Tipo str.</th><th>Trasferta €</th><th class="nr">Costo €</th><th></th></tr></thead>' +
+    '<div style="overflow-x:auto"><table><thead><tr><th style="min-width:140px">Risorsa</th><th>Microarea</th><th>Ore ord.</th><th>Ore str.</th><th>Tipo str.</th><th>Trasferta €</th><th class="nr">Costo €</th><th></th></tr></thead>' +
     '<tbody id="rtb"></tbody></table></div>' +
+    '<div id="rma-note" class="prod-note" style="margin:8px 0 0"></div>' +
     '<button class="btn bo" style="margin-top:10px;font-size:12px" onclick="addRap()">+ Aggiungi riga</button>' +
     '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:12px;border-top:1px solid #DEE2E8">' +
     '<strong>Totale manodopera</strong><strong style="font-size:18px;color:#1F3864" id="gtot">€ 0,00</strong></div>' +
@@ -276,7 +349,44 @@ function pgRap(c){
 
 function syncCant(){
   const s = document.getElementById("rc");
-  if(s && s.value){ const p=s.value.split("|"); const el=document.getElementById("rca"); if(el) el.value=p[2]||""; }
+  if(s && s.value){ const p=s.value.split("|"); const el=document.getElementById("rca"); if(el) el.value=p[2]||""; rapMALoad(p[0]); }
+}
+
+// Microaree disponibili per la commessa selezionata nel rapportino
+let rapMA = {cid:null, has:false, groups:[]};
+async function rapMALoad(cid){
+  rapMA = {cid:cid, has:false, groups:[], loading:true};
+  rapMARefresh();
+  const s = await maLoadStruttura(cid);
+  if(rapMA.cid!==cid) return;
+  rapMA.loading=false;
+  if(s.ok && s.cells.length){
+    const fById={}; s.fasi.forEach(f=>fById[f.id]=f);
+    const cellBy={}; s.cells.forEach(x=>cellBy[x.item_id+"|"+x.fase_id]=x);
+    rapMA.groups = s.items.filter(it=>it.esecutore!=="Terzi").map(it=>({
+      label:(it.codice||"")+(it.descrizione?" — "+it.descrizione:""),
+      opts:s.fasi.map(f=>cellBy[it.id+"|"+f.id]).filter(x=>x&&x.applicabile).map(x=>({id:x.id, label:(it.codice||"")+" · "+fById[x.fase_id].nome+((+x.perc||0)>=100?" ✓ completata":"")}))
+    })).filter(g=>g.opts.length);
+    rapMA.has = rapMA.groups.length>0;
+  }
+  rapMARefresh();
+}
+function rapMAOptions(sel){
+  if(rapMA.loading) return '<option value="">caricamento...</option>';
+  if(!rapMA.has) return '<option value="">nessuna microarea</option>';
+  return '<option value="">— seleziona —</option><option value="gen"'+(sel==="gen"?" selected":"")+'>Generale / non attribuibile</option>' +
+    rapMA.groups.map(g=>'<optgroup label="'+esc(g.label)+'">'+g.opts.map(o=>'<option value="'+o.id+'"'+(sel===o.id?" selected":"")+'>'+esc(o.label)+'</option>').join("")+'</optgroup>').join("");
+}
+function rapMARefresh(){
+  document.querySelectorAll(".r-ma").forEach(s=>{
+    const i=+s.dataset.i; const keep = rapR[i] && rapR[i].ma;
+    const valid = keep && (keep==="gen" || rapMA.groups.some(g=>g.opts.some(o=>o.id===keep)));
+    if(rapR[i]) rapR[i].ma = valid?keep:"";
+    s.innerHTML = rapMAOptions(valid?keep:"");
+    s.disabled = !rapMA.has;
+  });
+  const n=document.getElementById("rma-note");
+  if(n) n.innerHTML = rapMA.has ? 'Per ogni riga indica la microarea (item · lavorazione) su cui la risorsa ha lavorato. Se una risorsa lavora su più microaree nella stessa giornata, aggiungi una riga per ciascuna e indica la trasferta una sola volta.' : '';
 }
 
 function addRap(){
@@ -284,16 +394,18 @@ function addRap(){
   const optR = cache.risorse.map(x=>'<option value="'+x.id+'|'+x.nominativo+'|'+x.costo_ord+'">'+x.nominativo+' — '+x.qualifica+'</option>').join("");
   const tr = document.createElement("tr"); tr.id="rr"+i;
   tr.innerHTML =
-    '<td><select class="fs" style="font-size:12px" onchange="setRis('+i+',this)"><option value="">— seleziona —</option>'+optR+'</select></td>' +
-    '<td><input type="number" class="fi" style="width:65px;font-size:12px;padding:5px 8px" min="0" max="12" step="0.5" value="0" oninput="calcRap('+i+')"></td>' +
-    '<td><input type="number" class="fi" style="width:65px;font-size:12px;padding:5px 8px" min="0" max="6" step="0.5" value="0" oninput="calcRap('+i+')"></td>' +
-    '<td><select class="fs" style="font-size:12px" onchange="calcRap('+i+')">' +
+    '<td><select class="fs r-ris" style="font-size:12px" onchange="setRis('+i+',this)"><option value="">— seleziona —</option>'+optR+'</select></td>' +
+    '<td><select class="fs r-ma" data-i="'+i+'" style="font-size:12px;min-width:170px" onchange="rapR['+i+'].ma=this.value">'+rapMAOptions("")+'</select></td>' +
+    '<td><input type="number" class="fi r-ord" style="width:65px;font-size:12px;padding:5px 8px" min="0" max="12" step="0.5" value="0" oninput="calcRap('+i+')"></td>' +
+    '<td><input type="number" class="fi r-str" style="width:65px;font-size:12px;padding:5px 8px" min="0" max="6" step="0.5" value="0" oninput="calcRap('+i+')"></td>' +
+    '<td><select class="fs r-tipo" style="font-size:12px" onchange="calcRap('+i+')">' +
     '<option value="1.25">+25%</option><option value="1.30">STR30 +30%</option><option value="1.50">STR50 +50%</option>' +
     '</select></td>' +
-    '<td><input type="number" class="fi" style="width:75px;font-size:12px;padding:5px 8px" min="0" value="0" oninput="calcRap('+i+')"></td>' +
+    '<td><input type="number" class="fi r-traf" style="width:75px;font-size:12px;padding:5px 8px" min="0" value="0" oninput="calcRap('+i+')"></td>' +
     '<td class="nr" id="rt'+i+'" style="font-weight:600;color:#1F3864">€ 0,00</td>' +
     '<td><button onclick="delRap('+i+')" style="border:none;background:none;cursor:pointer;color:#C00000;font-size:16px">✕</button></td>';
   document.getElementById("rtb").appendChild(tr);
+  if(!rapMA.has) tr.querySelector(".r-ma").disabled=true;
 }
 
 function setRis(i, s){
@@ -305,11 +417,11 @@ function setRis(i, s){
 
 function calcRap(i){
   const tr = document.getElementById("rr"+i); if(!tr) return;
-  const inp = tr.querySelectorAll("input,select");
-  const ord=parseFloat(inp[1].value)||0, str=parseFloat(inp[2].value)||0;
-  const coef=parseFloat(inp[3].value)||1.25, traf=parseFloat(inp[4].value)||0;
+  const q = c=>tr.querySelector(c);
+  const ord=parseFloat(q(".r-ord").value)||0, str=parseFloat(q(".r-str").value)||0;
+  const coef=parseFloat(q(".r-tipo").value)||1.25, traf=parseFloat(q(".r-traf").value)||0;
   const r = rapR[i]; const tot=(ord+str*coef)*(r.costo_ora||0)+traf;
-  rapR[i] = {...r, ore_ord:ord, ore_str:str, tipo_str:coef===1.5?"STR50":coef===1.3?"STR30":"ORD", trasferta:traf, costo_giorno:tot};
+  rapR[i] = {...r, ore_ord:ord, ore_str:str, tipo_str:str>0?(coef===1.5?"STR50":coef===1.3?"STR30":"STR25"):"ORD", trasferta:traf, costo_giorno:tot};
   const el=document.getElementById("rt"+i); if(el) el.textContent="€ "+tot.toFixed(2);
   const gt=document.getElementById("gtot"); if(gt) gt.textContent="€ "+rapR.reduce((a,r)=>a+(r&&r.costo_giorno||0),0).toFixed(2);
 }
@@ -324,11 +436,15 @@ async function salvaRap(){
   const p=cs.value.split("|"); const cid=p[0], ccod=p[1];
   const righe=rapR.filter(r=>r&&r.risorsa_id&&(r.ore_ord>0||r.ore_str>0));
   if(!righe.length){alert("Inserisci almeno una riga con ore.");return;}
-  const tot=righe.reduce((a,r)=>a+(r.costo_giorno||0),0);
   const el=document.getElementById("msg-r");
+  if(rapMA.loading){ el.innerHTML='<div class="alert a">Attendi il caricamento delle microaree della commessa.</div>'; return; }
+  if(rapMA.has && rapMA.cid===cid){
+    const manc = righe.filter(r=>!r.ma);
+    if(manc.length){ el.innerHTML='<div class="alert r">Indica la microarea per: '+esc(manc.map(r=>r.nominativo).join(", "))+'. Se l\'attività non è riferibile a un item, scegli "Generale / non attribuibile".</div>'; return; }
+  }
+  const tot=righe.reduce((a,r)=>a+(r.costo_giorno||0),0);
   el.innerHTML='<div class="alert b"><div class="spin"></div>Salvataggio...</div>';
   sync("salvataggio...",false);
-  const header={...H, Prefer:"return=representation"};
   const rap = await sb("rapportini","","POST",{
     data_lavoro:document.getElementById("rd").value,
     commessa_id:cid, commessa_cod:ccod,
@@ -336,15 +452,27 @@ async function salvaRap(){
     caposquadra:document.getElementById("rcp").value||CU.nome,
     totale_costo:tot, salvato_da:CU.email
   });
-  if(!rap.ok){el.innerHTML='<div class="alert r">Errore: '+(rap.data?.message||"risposta vuota")+'</div>';sync("● Errore",false);return;}
+  if(!rap.ok){el.innerHTML='<div class="alert r">Errore: '+esc(rap.data?.message||"risposta vuota")+'</div>';sync("● Errore",false);return;}
   const rid=Array.isArray(rap.data)?rap.data[0]?.id:rap.data?.id;
   if(rid){
-    const rr=righe.map(r=>({rapportino_id:rid,risorsa_id:r.risorsa_id,nominativo:r.nominativo||"",ore_ord:r.ore_ord,ore_str:r.ore_str,tipo_str:r.tipo_str,trasferta:r.trasferta,costo_ora:r.costo_ora,costo_giorno:r.costo_giorno}));
-    await sb("rapportino_righe","","POST",rr);
+    const withMA = rapMA.has && rapMA.cid===cid;
+    const rr=righe.map(r=>{
+      const o={rapportino_id:rid,risorsa_id:r.risorsa_id,nominativo:r.nominativo||"",ore_ord:r.ore_ord,ore_str:r.ore_str,tipo_str:r.tipo_str,trasferta:r.trasferta,costo_ora:r.costo_ora,costo_giorno:r.costo_giorno};
+      if(withMA) o.microarea_id = r.ma==="gen"?null:r.ma;
+      return o;
+    });
+    const rs = await sb("rapportino_righe","","POST",rr);
+    if(!rs.ok){
+      await sb("rapportini","id=eq."+rid,"DELETE");
+      sync("● Errore",false);
+      const t=(rs.data&&rs.data.message)||rs.error||("HTTP "+rs.status);
+      el.innerHTML='<div class="alert r">Righe del rapportino non salvate, rapportino annullato: '+esc(t)+(/microarea_id/i.test(t)?'<br>Esegui prima il file migrazione_microaree.sql in Supabase → SQL Editor.':'')+'</div>';
+      return;
+    }
   }
   sync("● Connesso",true);
-  el.innerHTML='<div class="alert g">✅ Rapportino salvato! '+ccod+' — €'+tot.toFixed(2)+'</div>';
-  setTimeout(()=>go("rap"),2500);
+  el.innerHTML='<div class="alert g">✅ Rapportino salvato! '+esc(ccod)+' — €'+tot.toFixed(2)+'</div>';
+  setTimeout(()=>{ if(document.getElementById("msg-r")) go("rap"); },2500);
 }
 
 // ── STORICO ──────────────────────────────────────────────────────────
@@ -579,6 +707,730 @@ async function delRis(id,n){
   await sb("risorse","id=eq."+id,"DELETE");
   await loadCache(); sync("● Connesso",true); adTab(1);
 }
+// ── PRODUTTIVITÀ: CONSUNTIVO COMMESSA E MONTE ORE ─────────────────────
+// Monte ore = (Ricavo − Margine riservato) ÷ Costo orario
+// Ore guadagnate = Monte ore × % avanzamento
+// Indice di produttività = Ore guadagnate ÷ Ore effettive da rapportini
+const PROD_OK = 1.00, PROD_ATT = 0.90;
+let prodRap = null, prodRows = [], prodSel = null;
+let prodF = {stato:"attive", cantiere:"", q:""};
+
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
+function fN(v,d){ if(v==null||!isFinite(v)) return "—"; return Number(v).toLocaleString("it-IT",{minimumFractionDigits:d||0,maximumFractionDigits:d||0}); }
+function fE(v){ return v==null||!isFinite(v) ? "—" : "€ "+fN(v,0); }
+function fP(v,d){ return v==null||!isFinite(v) ? "—" : fN(v*100,d==null?1:d)+"%"; }
+function fD(s){ if(!s) return "—"; const p=String(s).slice(0,10).split("-"); return p.length===3?p[2]+"/"+p[1]+"/"+p[0]:s; }
+const MESI=["gen","feb","mar","apr","mag","giu","lug","ago","set","ott","nov","dic"];
+function fM(k){ const p=k.split("-"); return MESI[(+p[1])-1]+" "+p[0]; }
+
+async function prodLoadRap(){
+  let all=[], off=0; const step=1000;
+  while(true){
+    const r = await sb("rapportini","select=id,commessa_id,commessa_cod,data_lavoro,totale_costo,rapportino_righe(nominativo,ore_ord,ore_str,costo_giorno)&order=data_lavoro.asc&limit="+step+"&offset="+off);
+    if(!r.ok) return {ok:false, data:all, msg:(r.data&&r.data.message)||r.error||("HTTP "+r.status)};
+    const d = Array.isArray(r.data)?r.data:[];
+    all = all.concat(d);
+    if(d.length<step || off>100000) break;
+    off += step;
+  }
+  return {ok:true, data:all};
+}
+
+function prodSemaforo(x){
+  if(x.stato==="parametri") return {cls:"pgr", txt:"Parametri", tip:"Imposta margine riservato e costo orario"};
+  if(x.oreEff>0 && x.A===0) return {cls:"pa", txt:"Avanz. 0%", tip:"Ci sono ore registrate ma l'avanzamento è fermo a 0%"};
+  if(x.IP==null) return {cls:"pgr", txt:"Nessuna ora", tip:"Nessun rapportino registrato"};
+  if(x.IP>=PROD_OK) return {cls:"pg", txt:fN(x.IP,2), tip:"In linea o sopra il monte ore"};
+  if(x.IP>=PROD_ATT) return {cls:"pa", txt:fN(x.IP,2), tip:"Leggero sforamento: da monitorare"};
+  return {cls:"pr", txt:fN(x.IP,2), tip:"Ore consumate oltre l'avanzamento raggiunto"};
+}
+
+function prodCalc(){
+  const comm = cache.commesse||[], ris = cache.risorse||[], rap = prodRap||[];
+  const cr = ris.map(x=>+x.costo_ord||0).filter(v=>v>0);
+  const medioAnag = cr.length ? cr.reduce((a,b)=>a+b,0)/cr.length : 0;
+  const byId={}, byCod={};
+  comm.forEach(c=>{ byId[String(c.id)]=c; if(c.codice) byCod[String(c.codice)]=c; });
+  const agg={}; let orfani=0;
+  rap.forEach(r=>{
+    const c = byId[String(r.commessa_id)] || byCod[String(r.commessa_cod)];
+    if(!c){ orfani++; return; }
+    const k=String(c.id);
+    const a = agg[k] || (agg[k]={ore:0,oreOrd:0,oreStr:0,costo:0,giorni:{},first:null,last:null,mesi:{},ris:{}});
+    const righe = r.rapportino_righe||[];
+    let oreR=0, costoR=0;
+    righe.forEach(l=>{
+      const oo=+l.ore_ord||0, os=+l.ore_str||0, cg=+l.costo_giorno||0;
+      oreR+=oo+os; costoR+=cg; a.oreOrd+=oo; a.oreStr+=os;
+      const nk=l.nominativo||"—";
+      const rr=a.ris[nk]||(a.ris[nk]={ore:0,costo:0,gg:{}});
+      rr.ore+=oo+os; rr.costo+=cg; if(r.data_lavoro) rr.gg[r.data_lavoro]=1;
+    });
+    if(!righe.length) costoR=+r.totale_costo||0;
+    a.ore+=oreR; a.costo+=costoR;
+    const dl=r.data_lavoro||"";
+    if(dl){
+      a.giorni[dl]=1;
+      if(!a.first||dl<a.first) a.first=dl;
+      if(!a.last||dl>a.last) a.last=dl;
+      const mk=dl.slice(0,7);
+      const m=a.mesi[mk]||(a.mesi[mk]={ore:0,costo:0,gg:{}});
+      m.ore+=oreR; m.costo+=costoR; m.gg[dl]=1;
+    }
+  });
+
+  prodRows = comm.map(c=>{
+    const a = agg[String(c.id)] || {ore:0,oreOrd:0,oreStr:0,costo:0,giorni:{},first:null,last:null,mesi:{},ris:{}};
+    const R=+c.ricavo||0, B=+c.costo_budget||0;
+    const A=Math.min(Math.max(+c.avanzamento||0,0),100)/100;
+    const costoEff = a.ore>0 ? a.costo/a.ore : 0;
+    let M=null, mSrc="da impostare";
+    if(c.margine_riservato!=null && c.margine_riservato!==""){ M=(+c.margine_riservato)/100; mSrc="impostato"; }
+    else if(R>0 && B>0 && B<R){ M=(R-B)/R; mSrc="da budget costo"; }
+    let Ch=null, hSrc="da impostare";
+    if(+c.costo_orario>0){ Ch=+c.costo_orario; hSrc="impostato"; }
+    else if(costoEff>0){ Ch=costoEff; hSrc="media rapportini"; }
+    else if(medioAnag>0){ Ch=medioAnag; hSrc="media anagrafica risorse"; }
+    const x = {c, id:String(c.id), codice:c.codice, cliente:c.cliente, cantiere:c.cantiere, statoComm:c.stato,
+      R, A, M, mSrc, Ch, hSrc, oreEff:a.ore, oreOrd:a.oreOrd, oreStr:a.oreStr, costoEff:a.costo,
+      nGiorni:Object.keys(a.giorni).length, first:a.first, last:a.last, mesi:a.mesi, ris:a.ris};
+    if(M==null || Ch==null || R<=0){
+      x.stato="parametri"; x.MO=null; x.oreGuad=null; x.oreRes=null; x.IP=null; x.budgetMdo=null;
+    } else {
+      x.stato="ok";
+      x.budgetMdo = R*(1-M);
+      x.MO = x.budgetMdo/Ch;
+      x.oreGuad = x.MO*A;
+      x.oreRes = x.MO - x.oreEff;
+      x.IP = (x.oreEff>0 && A>0) ? x.oreGuad/x.oreEff : null;
+      x.consumo = x.MO>0 ? x.oreEff/x.MO : null;
+      x.eacOre = (x.oreEff>0 && A>0) ? x.oreEff/A : null;
+      x.eacCosto = (x.costoEff>0 && A>0) ? x.costoEff/A : null;
+      x.scostOre = x.eacOre!=null ? x.MO - x.eacOre : null;
+      x.margFin = x.eacCosto!=null ? (R - x.eacCosto)/R : null;
+    }
+    x.sem = prodSemaforo(x);
+    return x;
+  });
+  return {orfani};
+}
+
+async function pgProd(c){
+  c.innerHTML='<div class="empty"><div class="spin"></div>Caricamento rapportini...</div>';
+  const r = await prodLoadRap();
+  if(!r.ok && !r.data.length){ c.innerHTML='<div class="alert r">Rapportini non leggibili dal database: '+esc(r.msg)+'</div>'; return; }
+  prodRap = r.data;
+  const info = prodCalc();
+  const cants = [...new Set((cache.commesse||[]).map(x=>x.cantiere).filter(Boolean))].sort();
+  c.innerHTML =
+    (r.ok?"":'<div class="alert a">Lettura parziale dei rapportini: '+esc(r.msg)+'</div>') +
+    (info.orfani?'<div class="alert a">'+info.orfani+' rapportini non sono collegati a nessuna commessa in archivio e sono esclusi dal calcolo.</div>':'') +
+    '<div id="prod-kpi"></div>' +
+    '<div id="prod-det"></div>' +
+    '<div class="card prod-bar">' +
+      '<select class="fs" id="pf-s" onchange="prodFil()">' +
+        [["attive","Commesse non chiuse"],["tutte","Tutte le commesse"],["In corso","In corso"],["Avvio","Avvio"],["Sospesa","Sospesa"],["Chiusa","Chiuse"],["allerta","Solo in allerta"]]
+        .map(o=>'<option value="'+o[0]+'"'+(prodF.stato===o[0]?" selected":"")+'>'+o[1]+'</option>').join("") +
+      '</select>' +
+      '<select class="fs" id="pf-c" onchange="prodFil()"><option value="">Tutti i cantieri</option>'+cants.map(x=>'<option'+(prodF.cantiere===x?" selected":"")+'>'+esc(x)+'</option>').join("")+'</select>' +
+      '<input class="fi" id="pf-q" placeholder="Cerca codice o cliente" value="'+esc(prodF.q)+'" oninput="prodFil()">' +
+      '<button class="btn bo" onclick="pgProd(document.getElementById(\'content\'))">↺ Aggiorna</button>' +
+    '</div>' +
+    '<div id="prod-tab"></div>' +
+    '<p class="prod-note">Monte ore = (ricavo − margine riservato) ÷ costo orario. Ore guadagnate = monte ore × avanzamento. ' +
+    'Indice di produttività = ore guadagnate ÷ ore effettive dei rapportini: sopra 1,00 la commessa consuma meno ore del previsto, sotto 0,90 è in allerta. ' +
+    'Il costo orario dei rapportini comprende maggiorazioni e trasferte. L\'indice è attendibile solo se i rapportini sono completi e l\'avanzamento è aggiornato.</p>';
+  prodRender();
+  if(prodSel && prodRows.find(x=>x.id===prodSel)) prodDet(prodSel,true);
+}
+
+function prodFil(){
+  prodF.stato=document.getElementById("pf-s").value;
+  prodF.cantiere=document.getElementById("pf-c").value;
+  prodF.q=document.getElementById("pf-q").value.trim().toLowerCase();
+  prodRender();
+}
+
+function prodVis(){
+  return prodRows.filter(x=>{
+    if(prodF.stato==="attive" && x.statoComm==="Chiusa") return false;
+    if(prodF.stato==="allerta" && !(x.sem.cls==="pr"||x.sem.cls==="pa")) return false;
+    if(!["attive","tutte","allerta"].includes(prodF.stato) && x.statoComm!==prodF.stato) return false;
+    if(prodF.cantiere && x.cantiere!==prodF.cantiere) return false;
+    if(prodF.q && !((x.codice||"")+" "+(x.cliente||"")).toLowerCase().includes(prodF.q)) return false;
+    return true;
+  }).sort((a,b)=>{
+    const rank=s=>({pr:0,pa:1,pg:2,pgr:3}[s.cls]);
+    return rank(a.sem)-rank(b.sem) || (a.IP??9)-(b.IP??9);
+  });
+}
+
+function prodRender(){
+  const v = prodVis();
+  const calc = v.filter(x=>x.IP!=null);
+  const sG = calc.reduce((a,x)=>a+x.oreGuad,0), sE = calc.reduce((a,x)=>a+x.oreEff,0);
+  const ipTot = sE>0 ? sG/sE : null;
+  const oreTot = v.reduce((a,x)=>a+x.oreEff,0), costoTot = v.reduce((a,x)=>a+x.costoEff,0);
+  const nRos = v.filter(x=>x.sem.cls==="pr").length, nPar = v.filter(x=>x.stato==="parametri").length;
+  const ipCls = ipTot==null?"":ipTot>=PROD_OK?"g":ipTot>=PROD_ATT?"a":"r";
+  document.getElementById("prod-kpi").innerHTML =
+    '<div class="kg">' +
+    '<div class="kc '+ipCls+'"><div class="kl">Indice produttività</div><div class="kv">'+(ipTot==null?"—":fN(ipTot,2))+'</div><div class="ks">su '+calc.length+' commesse misurabili</div></div>' +
+    '<div class="kc b"><div class="kl">Ore effettive</div><div class="kv">'+fN(oreTot)+'</div><div class="ks">da rapportini</div></div>' +
+    '<div class="kc b"><div class="kl">Ore guadagnate</div><div class="kv">'+fN(sG)+'</div><div class="ks">monte ore × avanzamento</div></div>' +
+    '<div class="kc b"><div class="kl">Costo manodopera</div><div class="kv">€'+fN(costoTot/1000)+'K</div><div class="ks">consuntivo rapportini</div></div>' +
+    '<div class="kc '+(nRos?"r":"g")+'"><div class="kl">In allerta</div><div class="kv">'+nRos+'</div><div class="ks">indice sotto '+fN(PROD_ATT,2)+'</div></div>' +
+    (nPar?'<div class="kc"><div class="kl">Senza parametri</div><div class="kv">'+nPar+'</div><div class="ks">margine o costo orario</div></div>':'') +
+    '</div>';
+  if(!v.length){ document.getElementById("prod-tab").innerHTML='<div class="empty">Nessuna commessa corrisponde ai filtri.</div>'; return; }
+  document.getElementById("prod-tab").innerHTML =
+    '<div class="card" style="padding:0;overflow:hidden"><div style="overflow-x:auto"><table>' +
+    '<thead><tr><th>Commessa</th><th>Cantiere</th><th class="nr">Avanz.</th><th class="nr">Monte ore</th><th class="nr">Ore guadagnate</th><th class="nr">Ore effettive</th><th class="nr">Ore residue</th><th style="text-align:center">Indice</th><th class="nr">Margine mdo a finire</th><th></th></tr></thead><tbody>' +
+    v.map(x=>'<tr class="'+(prodSel===x.id?"prod-selrow":"")+'">' +
+      '<td><strong>'+esc(x.codice)+'</strong><br><span class="prod-sub">'+esc(x.cliente)+'</span></td>' +
+      '<td>'+esc(x.cantiere)+'</td>' +
+      '<td class="nr">'+fN(x.A*100)+'%</td>' +
+      '<td class="nr">'+fN(x.MO)+'</td>' +
+      '<td class="nr">'+fN(x.oreGuad)+'</td>' +
+      '<td class="nr"><strong>'+fN(x.oreEff)+'</strong></td>' +
+      '<td class="nr '+(x.oreRes!=null&&x.oreRes<0?"neg":"")+'">'+fN(x.oreRes)+'</td>' +
+      '<td style="text-align:center"><span class="pill '+x.sem.cls+'" title="'+esc(x.sem.tip)+'">'+x.sem.txt+'</span></td>' +
+      '<td class="nr '+(x.margFin!=null&&x.margFin<0?"neg":"")+'">'+fP(x.margFin)+'</td>' +
+      '<td style="white-space:nowrap"><button class="btn bo prod-mini" onclick="prodDet(\''+x.id+'\')">Dettaglio</button> ' +
+      '<button class="btn bo prod-mini" title="Stampa monte ore" onclick="prodStampa(\''+x.id+'\')" '+(x.stato!=="ok"?"disabled":"")+'>🖨</button></td>' +
+    '</tr>').join("") +
+    '</tbody><tfoot><tr style="background:#EBF3FB;font-weight:700"><td colspan="4">TOTALE ('+v.length+')</td>' +
+    '<td class="nr">'+fN(sG)+'</td><td class="nr">'+fN(oreTot)+'</td><td></td>' +
+    '<td style="text-align:center">'+(ipTot==null?"—":fN(ipTot,2))+'</td><td colspan="2"></td></tr></tfoot></table></div></div>';
+}
+
+function prodAnello(x, size){
+  const S=size||180, cx=S/2, r1=S*0.40, r2=S*0.29, w1=S*0.085, w2=S*0.06;
+  const C1=2*Math.PI*r1, C2=2*Math.PI*r2;
+  const cons = x.consumo==null?0:x.consumo, over = cons>1;
+  const p1 = Math.min(cons,1), p2 = Math.min(x.A,1);
+  const col1 = over?"#C00000":(x.IP!=null&&x.IP<PROD_ATT?"#F59E0B":"#1F3864");
+  return '<svg viewBox="0 0 '+S+' '+S+'" width="'+S+'" height="'+S+'" role="img" aria-label="Ore consumate '+fP(cons,0)+', avanzamento '+fP(x.A,0)+'">' +
+    '<circle cx="'+cx+'" cy="'+cx+'" r="'+r1+'" fill="none" stroke="#DEE2E8" stroke-width="'+w1+'"/>' +
+    '<circle cx="'+cx+'" cy="'+cx+'" r="'+r1+'" fill="none" stroke="'+col1+'" stroke-width="'+w1+'" stroke-dasharray="'+(C1*p1)+' '+C1+'" transform="rotate(-90 '+cx+' '+cx+')"/>' +
+    '<circle cx="'+cx+'" cy="'+cx+'" r="'+r2+'" fill="none" stroke="#EEF2F6" stroke-width="'+w2+'"/>' +
+    '<circle cx="'+cx+'" cy="'+cx+'" r="'+r2+'" fill="none" stroke="#70AD47" stroke-width="'+w2+'" stroke-dasharray="'+(C2*p2)+' '+C2+'" transform="rotate(-90 '+cx+' '+cx+')"/>' +
+    '<text x="'+cx+'" y="'+(cx-2)+'" text-anchor="middle" font-size="'+(S*0.15)+'" font-weight="700" fill="'+col1+'" font-family="Segoe UI,system-ui,sans-serif">'+fP(cons,0)+'</text>' +
+    '<text x="'+cx+'" y="'+(cx+S*0.1)+'" text-anchor="middle" font-size="'+(S*0.065)+'" fill="#64748B" font-family="Segoe UI,system-ui,sans-serif">ore consumate</text>' +
+    '</svg>';
+}
+
+function prodDet(id, silent){
+  const x = prodRows.find(r=>r.id===id); if(!x) return;
+  prodSel = id;
+  const canEdit = CU && CU.ruolo==="direzione";
+  const mesi = Object.keys(x.mesi).sort();
+  let cum=0;
+  const mesiHTML = mesi.length ? mesi.map(k=>{ const m=x.mesi[k]; cum+=m.ore;
+      return '<tr><td>'+fM(k)+'</td><td class="nr">'+Object.keys(m.gg).length+'</td><td class="nr">'+fN(m.ore,1)+'</td><td class="nr">'+fN(cum,1)+'</td><td class="nr">'+fE(m.costo)+'</td></tr>'; }).join("")
+    : '<tr><td colspan="5" class="prod-sub" style="text-align:center">Nessun rapportino registrato su questa commessa.</td></tr>';
+  const risL = Object.entries(x.ris).sort((a,b)=>b[1].ore-a[1].ore);
+  const risHTML = risL.length ? risL.slice(0,10).map(([n,v])=>'<tr><td>'+esc(n)+'</td><td class="nr">'+Object.keys(v.gg).length+'</td><td class="nr">'+fN(v.ore,1)+'</td><td class="nr">'+fP(x.oreEff?v.ore/x.oreEff:null,0)+'</td><td class="nr">'+fE(v.costo)+'</td></tr>').join("")
+    : '<tr><td colspan="5" class="prod-sub" style="text-align:center">—</td></tr>';
+  const srcCls = s=>s==="da impostare"?"neg":"prod-sub";
+  document.getElementById("prod-det").innerHTML =
+    '<div class="card prod-det">' +
+    '<div class="prod-head"><div><div class="card-title" style="margin:0">'+esc(x.codice)+' — '+esc(x.cliente)+'</div>' +
+      '<div class="prod-sub">'+esc(x.cantiere)+' · stato '+esc(x.statoComm||"—")+' · ricavo '+fE(x.R)+' · rapportini dal '+fD(x.first)+' al '+fD(x.last)+' ('+x.nGiorni+' giorni)</div></div>' +
+      '<div style="display:flex;gap:6px"><button class="btn bo" onclick="pgMicro(\''+x.id+'\',\'av\',\'prod\')">Microaree</button><button class="btn bp" onclick="prodStampa(\''+x.id+'\')" '+(x.stato!=="ok"?"disabled":"")+'>🖨 Stampa monte ore</button><button class="btn bo" onclick="prodChiudi()">Chiudi</button></div></div>' +
+    '<div id="prod-msg"></div>' +
+    '<div class="prod-grid">' +
+      '<div class="prod-ring">'+(x.stato==="ok"?prodAnello(x,190):'<div class="empty" style="padding:30px 10px">Imposta i parametri per calcolare il monte ore.</div>') +
+        '<div class="prod-leg"><span><i style="background:'+(x.consumo>1?"#C00000":(x.IP!=null&&x.IP<PROD_ATT?"#F59E0B":"#1F3864"))+'"></i>Ore consumate sul monte ore</span><span><i style="background:#70AD47"></i>Avanzamento '+fN(x.A*100)+'%</span></div>' +
+        (x.stato==="ok"&&x.consumo!=null?'<div class="prod-sub" style="text-align:center;margin-top:6px">'+(x.consumo>x.A?"L'anello esterno supera quello interno: si consumano più ore dell'avanzamento.":"Ore consumate in linea o sotto l'avanzamento.")+'</div>':'') +
+      '</div>' +
+      '<div>' +
+        '<div class="prod-nums">' +
+          '<div><span>Monte ore</span><b>'+fN(x.MO)+'</b></div>' +
+          '<div><span>Ore effettive</span><b>'+fN(x.oreEff)+'</b><em>ord. '+fN(x.oreOrd)+' · str. '+fN(x.oreStr)+'</em></div>' +
+          '<div><span>Ore residue</span><b class="'+(x.oreRes<0?"neg":"")+'">'+fN(x.oreRes)+'</b></div>' +
+          '<div><span>Ore guadagnate</span><b>'+fN(x.oreGuad)+'</b></div>' +
+          '<div><span>Indice produttività</span><b><span class="pill '+x.sem.cls+'">'+x.sem.txt+'</span></b><em>'+esc(x.sem.tip)+'</em></div>' +
+          '<div><span>Stima ore a finire</span><b>'+fN(x.eacOre)+'</b><em>'+(x.scostOre==null?"":(x.scostOre>=0?"risparmio ":"sforamento ")+fN(Math.abs(x.scostOre))+" ore")+'</em></div>' +
+          '<div><span>Budget manodopera</span><b>'+fE(x.budgetMdo)+'</b></div>' +
+          '<div><span>Costo consuntivo</span><b>'+fE(x.costoEff)+'</b><em>stima a finire '+fE(x.eacCosto)+'</em></div>' +
+          '<div><span>Margine mdo a finire</span><b class="'+(x.margFin<0?"neg":"")+'">'+fP(x.margFin)+'</b><em>margine riservato '+fP(x.M)+'</em></div>' +
+        '</div>' +
+        '<div class="prod-par">' +
+          '<div class="fg"><label class="fl">Margine riservato %</label><input class="fi" id="pp-m" type="number" step="0.5" min="0" max="99" value="'+(x.c.margine_riservato!=null&&x.c.margine_riservato!==""?x.c.margine_riservato:"")+'" placeholder="'+(x.M!=null?fN(x.M*100,1):"")+'" '+(canEdit?"":"disabled")+'><div class="'+srcCls(x.mSrc)+'" style="font-size:11px;margin-top:3px">In uso: '+(x.M!=null?fN(x.M*100,1)+"% ":"")+'('+x.mSrc+')</div></div>' +
+          '<div class="fg"><label class="fl">Costo orario €/h</label><input class="fi" id="pp-h" type="number" step="0.5" min="0" value="'+(+x.c.costo_orario>0?x.c.costo_orario:"")+'" placeholder="'+(x.Ch!=null?fN(x.Ch,2):"")+'" '+(canEdit?"":"disabled")+'><div class="'+srcCls(x.hSrc)+'" style="font-size:11px;margin-top:3px">In uso: '+(x.Ch!=null?"€ "+fN(x.Ch,2)+" ":"")+'('+x.hSrc+')</div></div>' +
+          (canEdit?'<div class="fg" style="align-self:end"><button class="btn bp" onclick="prodSalvaPar(\''+x.id+'\')">💾 Salva parametri</button><div class="prod-sub" style="font-size:11px;margin-top:3px">Campo vuoto = valore automatico</div></div>':'<div class="prod-sub" style="align-self:center;font-size:12px">I parametri si modificano dal profilo Direzione.</div>') +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="fr2" style="margin-top:14px">' +
+      '<div><div class="card-title">Andamento mensile</div><div style="overflow-x:auto"><table><thead><tr><th>Mese</th><th class="nr">Giorni</th><th class="nr">Ore</th><th class="nr">Ore cumulate</th><th class="nr">Costo</th></tr></thead><tbody>'+mesiHTML+'</tbody></table></div></div>' +
+      '<div><div class="card-title">Ore per risorsa'+(risL.length>10?" (prime 10 di "+risL.length+")":"")+'</div><div style="overflow-x:auto"><table><thead><tr><th>Risorsa</th><th class="nr">Giorni</th><th class="nr">Ore</th><th class="nr">Quota</th><th class="nr">Costo</th></tr></thead><tbody>'+risHTML+'</tbody></table></div></div>' +
+    '</div></div>';
+  prodRender();
+  if(!silent) document.getElementById("prod-det").scrollIntoView({behavior:"smooth", block:"start"});
+}
+
+function prodChiudi(){ prodSel=null; document.getElementById("prod-det").innerHTML=""; prodRender(); }
+
+const PROD_SQL = "alter table public.commesse add column if not exists margine_riservato numeric(5,2), add column if not exists costo_orario numeric(8,2);\nnotify pgrst, 'reload schema';";
+
+async function prodSalvaPar(id){
+  const msg = document.getElementById("prod-msg");
+  const mv = document.getElementById("pp-m").value.trim(), hv = document.getElementById("pp-h").value.trim();
+  const m = mv===""?null:parseFloat(mv.replace(",",".")), h = hv===""?null:parseFloat(hv.replace(",","."));
+  if(m!=null && (isNaN(m)||m<0||m>=100)){ msg.innerHTML='<div class="alert r">Il margine riservato deve essere compreso tra 0 e 99%.</div>'; return; }
+  if(h!=null && (isNaN(h)||h<=0)){ msg.innerHTML='<div class="alert r">Il costo orario deve essere maggiore di zero.</div>'; return; }
+  sync("salvataggio...",false);
+  const r = await sb("commesse","id=eq."+id,"PATCH",{margine_riservato:m, costo_orario:h});
+  if(!r.ok){
+    const t = (r.data&&(r.data.message||r.data.code))||r.error||"";
+    sync("● Errore",false);
+    if(/margine_riservato|costo_orario|PGRST204|schema cache|column/i.test(t)){
+      msg.innerHTML='<div class="alert r"><strong>Colonne mancanti nel database.</strong> Per salvare i parametri esegui una volta questo comando in Supabase → SQL Editor, poi riprova:<pre class="prod-sql">'+esc(PROD_SQL)+'</pre></div>';
+    } else msg.innerHTML='<div class="alert r">Salvataggio non riuscito: '+esc(t||("HTTP "+r.status))+'</div>';
+    return;
+  }
+  const c = (cache.commesse||[]).find(x=>String(x.id)===id);
+  if(c){ c.margine_riservato=m; c.costo_orario=h; }
+  sync("● Connesso",true);
+  prodCalc(); prodDet(id,true);
+  document.getElementById("prod-msg").innerHTML='<div class="alert g">✅ Parametri salvati e monte ore ricalcolato.</div>';
+}
+
+function prodStampa(id){
+  const x = prodRows.find(r=>r.id===id); if(!x || x.stato!=="ok") return;
+  const w = window.open("","_blank");
+  if(!w){ alert("Il browser ha bloccato la finestra di stampa: consenti i popup per questo sito."); return; }
+  const mesi = Object.keys(x.mesi).sort(); let cum=0;
+  const oggi = new Date().toLocaleDateString("it-IT");
+  const semTxt = x.IP==null?"n.d.":fN(x.IP,2)+" — "+x.sem.tip;
+  w.document.write('<!DOCTYPE html><html lang="it"><head><meta charset="UTF-8"><title>Monte ore '+esc(x.codice)+'</title><style>'+
+    '@page{size:A4;margin:14mm}*{box-sizing:border-box;margin:0;padding:0}body{font-family:"Segoe UI",system-ui,sans-serif;color:#1A1A2E;font-size:11pt;-webkit-print-color-adjust:exact;print-color-adjust:exact}'+
+    '.hd{background:#1F3864;color:#fff;padding:14px 18px;display:flex;justify-content:space-between;align-items:flex-end}.hd h1{font-size:16pt}.hd div{font-size:9pt;opacity:.85;text-align:right}'+
+    '.bar{height:4px;background:#C0392B}.meta{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0;font-size:9pt}.meta div{border-left:3px solid #2E74B5;padding:4px 8px;background:#F5F7FA}.meta b{display:block;font-size:10.5pt;color:#1F3864}'+
+    '.mid{display:flex;gap:22px;align-items:center;margin:10px 0 16px}.big{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.big div{border:1px solid #DEE2E8;border-top:4px solid #1F3864;padding:10px;text-align:center}.big span{font-size:8.5pt;color:#64748B}.big b{display:block;font-size:19pt;color:#1F3864}'+
+    '.neg{color:#C00000!important}table{width:100%;border-collapse:collapse;font-size:9.5pt;margin-top:6px}th{background:#1F3864;color:#fff;text-align:left;padding:5px 8px}td{padding:4px 8px;border-bottom:1px solid #DEE2E8}.nr{text-align:right}h2{font-size:11pt;color:#1F3864;margin:14px 0 4px}'+
+    '.leg{font-size:8.5pt;color:#64748B;text-align:center;margin-top:4px}.leg i{display:inline-block;width:9px;height:9px;border-radius:2px;margin:0 4px 0 10px;vertical-align:-1px}.ft{margin-top:18px;font-size:8pt;color:#94A3B8;border-top:1px solid #DEE2E8;padding-top:6px;display:flex;justify-content:space-between}.nt{font-size:8.5pt;color:#64748B;margin-top:8px;line-height:1.45}'+
+    '</style></head><body>'+
+    '<div class="hd"><h1>⚓ Monte ore commessa</h1><div>DI.MA. Navaltecnica Service S.r.l.<br>Controllo produttività — '+oggi+'</div></div><div class="bar"></div>'+
+    '<div class="meta"><div>Commessa<b>'+esc(x.codice)+'</b></div><div>Committente<b>'+esc(x.cliente)+'</b></div><div>Cantiere<b>'+esc(x.cantiere)+'</b></div><div>Ricavo<b>'+fE(x.R)+'</b></div>'+
+    '<div>Avanzamento<b>'+fN(x.A*100)+'%</b></div><div>Margine riservato<b>'+fP(x.M)+'</b></div><div>Costo orario<b>€ '+fN(x.Ch,2)+'</b></div><div>Rapportini<b>'+fD(x.first)+' – '+fD(x.last)+'</b></div></div>'+
+    '<div class="mid"><div>'+prodAnello(x,200)+'<div class="leg"><i style="background:#1F3864"></i>Ore consumate<i style="background:#70AD47"></i>Avanzamento</div></div>'+
+    '<div class="big"><div><span>Monte ore</span><b>'+fN(x.MO)+'</b></div><div><span>Ore consumate</span><b>'+fN(x.oreEff)+'</b></div><div><span>Ore residue</span><b class="'+(x.oreRes<0?"neg":"")+'">'+fN(x.oreRes)+'</b></div>'+
+    '<div><span>Ore guadagnate</span><b>'+fN(x.oreGuad)+'</b></div><div><span>Indice produttività</span><b class="'+(x.IP!=null&&x.IP<PROD_ATT?"neg":"")+'">'+(x.IP==null?"—":fN(x.IP,2))+'</b></div><div><span>Margine mdo a finire</span><b class="'+(x.margFin<0?"neg":"")+'">'+fP(x.margFin)+'</b></div></div></div>'+
+    '<table><tr><th>Sintesi economica manodopera</th><th class="nr">Valore</th></tr>'+
+    '<tr><td>Budget manodopera (ricavo − margine riservato)</td><td class="nr">'+fE(x.budgetMdo)+'</td></tr>'+
+    '<tr><td>Costo consuntivo da rapportini</td><td class="nr">'+fE(x.costoEff)+'</td></tr>'+
+    '<tr><td>Stima costo a finire (consuntivo ÷ avanzamento)</td><td class="nr">'+fE(x.eacCosto)+'</td></tr>'+
+    '<tr><td>Stima ore a finire / scostamento sul monte ore</td><td class="nr">'+fN(x.eacOre)+' / '+(x.scostOre==null?"—":(x.scostOre>=0?"+":"−")+fN(Math.abs(x.scostOre)))+'</td></tr>'+
+    '<tr><td>Valutazione</td><td class="nr">'+esc(semTxt)+'</td></tr></table>'+
+    '<h2>Andamento mensile</h2><table><tr><th>Mese</th><th class="nr">Giorni</th><th class="nr">Ore</th><th class="nr">Ore cumulate</th><th class="nr">% monte ore</th><th class="nr">Costo</th></tr>'+
+    (mesi.length?mesi.map(k=>{const m=x.mesi[k]; cum+=m.ore; return '<tr><td>'+fM(k)+'</td><td class="nr">'+Object.keys(m.gg).length+'</td><td class="nr">'+fN(m.ore,1)+'</td><td class="nr">'+fN(cum,1)+'</td><td class="nr">'+fP(x.MO?cum/x.MO:null,0)+'</td><td class="nr">'+fE(m.costo)+'</td></tr>';}).join(""):'<tr><td colspan="6">Nessun rapportino registrato.</td></tr>')+
+    '</table>'+
+    '<p class="nt">Monte ore = (ricavo − margine riservato) ÷ costo orario. Ore guadagnate = monte ore × avanzamento. Indice di produttività = ore guadagnate ÷ ore consumate (≥ 1,00 in linea; 0,90–1,00 da monitorare; &lt; 0,90 in allerta). '+
+    'Valori riferiti alla sola manodopera registrata nei rapportini, comprensiva di maggiorazioni per straordinario e trasferte. Fonte parametri: margine '+esc(x.mSrc)+', costo orario '+esc(x.hSrc)+'.</p>'+
+    '<div class="ft"><span>Documento riservato — uso interno</span><span>A cura del Dott. Giovanni Acunzo — Studio di Consulenza</span></div>'+
+    '<script>window.onload=function(){setTimeout(function(){window.print();},300);};<\/script></body></html>');
+  w.document.close();
+}
+
+// ── MICROAREE DI COMMESSA ─────────────────────────────────────────────
+// Commessa → Item (es. singola porta) → Lavorazione (fase). Ogni incrocio
+// applicabile è una microarea su cui si registrano ore e avanzamento.
+let MA = null;
+const MA_SQL_MSG = 'Le tabelle delle microaree non sono ancora presenti nel database. Esegui una volta il file <strong>migrazione_microaree.sql</strong> in Supabase → SQL Editor, poi ricarica la pagina.';
+
+function maErr(r){ const t=(r.data&&(r.data.message||r.data.code))||r.error||""; return /PGRST205|PGRST204|42P01|42703|does not exist|Could not find|microarea_id|commessa_fasi|commessa_item|commessa_microaree/i.test(t) ? "sql" : (t||("HTTP "+r.status)); }
+function maIsDir(){ return CU && CU.ruolo==="direzione"; }
+function maCanEdit(){ return CU && (CU.ruolo==="direzione"||CU.ruolo==="cantiere"); }
+
+async function maLoadStruttura(cid){
+  const q="commessa_id=eq."+cid;
+  const [f,i,m]=await Promise.all([
+    sb("commessa_fasi",q+"&select=*&order=ordine"),
+    sb("commessa_item",q+"&select=*&order=ordine"),
+    sb("commessa_microaree",q+"&select=*")]);
+  for(const r of [f,i,m]) if(!r.ok) return {ok:false, err:maErr(r)};
+  return {ok:true, fasi:f.data||[], items:i.data||[], cells:m.data||[]};
+}
+
+async function maLoadOre(cid){
+  let all=[], off=0;
+  while(true){
+    const r=await sb("rapportini","commessa_id=eq."+cid+"&select=id,data_lavoro,rapportino_righe(microarea_id,nominativo,ore_ord,ore_str,costo_giorno)&limit=1000&offset="+off);
+    if(!r.ok) return {ok:false, err:maErr(r)};
+    const d=r.data||[]; all=all.concat(d);
+    if(d.length<1000) break; off+=1000;
+  }
+  const ore={}, gen={ore:0,costo:0};
+  all.forEach(rp=>(rp.rapportino_righe||[]).forEach(l=>{
+    const o=(+l.ore_ord||0)+(+l.ore_str||0), c=+l.costo_giorno||0;
+    if(l.microarea_id){
+      const a=ore[l.microarea_id]||(ore[l.microarea_id]={ore:0,costo:0,gg:{},ris:{}});
+      a.ore+=o; a.costo+=c; if(rp.data_lavoro) a.gg[rp.data_lavoro]=1;
+      const n=l.nominativo||"—"; a.ris[n]=(a.ris[n]||0)+o;
+    } else { gen.ore+=o; gen.costo+=c; }
+  }));
+  return {ok:true, ore, gen};
+}
+
+// Ogni lavorazione pesa uguale nell'avanzamento (scelta della Direzione).
+// Senza ore standard, la produttività si legge sulle ore effettive:
+// ore per item completato di ciascuna lavorazione e stima ore a finire.
+const MA_SOGLIA_MEDIA = 1.30;
+function maCalc(){
+  MA.fById={}; MA.fasi.forEach(f=>MA.fById[f.id]=f);
+  MA.iById={}; MA.items.forEach(i=>MA.iById[i.id]=i);
+  MA.cellBy={}; MA.cells.forEach(x=>MA.cellBy[x.item_id+"|"+x.fase_id]=x);
+  const app = MA.cells.filter(x=>x.applicabile && MA.fById[x.fase_id] && MA.iById[x.item_id]);
+  const T = {n:app.length,done:0,sp:0,memoTot:0,memoOk:0,eff:0,nD:0,spD:0,warn:0};
+  const row={}, col={};
+  app.forEach(x=>{
+    const p=Math.min(Math.max(+x.perc||0,0),100)/100, it=MA.iById[x.item_id], f=MA.fById[x.fase_id];
+    const e=(MA.ore[x.id]||{}).ore||0, terzi=it.esecutore==="Terzi";
+    const R=row[it.id]||(row[it.id]={sp:0,ore:0,n:0,done:0});
+    const C=col[f.id]||(col[f.id]={sp:0,ore:0,n:0,done:0,effU:0,eqU:0,cnt:0});
+    R.sp+=p; R.ore+=e; R.n++; if(p>=1) R.done++;
+    C.sp+=p; C.ore+=e; C.n++; if(p>=1) C.done++;
+    T.sp+=p; if(p>=1) T.done++;
+    if(f.richiede_memo){ T.memoTot++; if(p>=1 && x.memo_rif) T.memoOk++; }
+    if(e>0 && p===0) T.warn++;
+    if(!terzi){ T.eff+=e; T.nD++; T.spD+=p; if(p>0 && e>0){ C.effU+=e; C.eqU+=p; C.cnt++; } }
+  });
+  Object.values(col).forEach(C=>{ C.oreUnit = C.eqU>0 ? C.effU/C.eqU : null; });
+  T.av  = T.n  ? T.sp/T.n   : 0;
+  T.avD = T.nD ? T.spD/T.nD : 0;
+  T.eac = T.avD>0 && T.eff>0 ? T.eff/T.avD : null;
+  T.oreAttr = Object.values(MA.ore).reduce((a,v)=>a+v.ore,0);
+  MA.T=T; MA.row=row; MA.col=col;
+}
+
+// Ore della microarea oltre la media della lavorazione (almeno 3 item misurabili)
+function maFuoriMedia(x){
+  const it=MA.iById[x.item_id], C=MA.col[x.fase_id], e=(MA.ore[x.id]||{}).ore||0, p=(+x.perc||0)/100;
+  if(!C || it.esecutore==="Terzi" || !(p>0) || !(e>0) || C.cnt<3 || !C.oreUnit) return null;
+  const r=(e/p)/C.oreUnit; return r>MA_SOGLIA_MEDIA ? r : null;
+}
+
+async function pgMicro(cid, tab, back){
+  const c=document.getElementById("content");
+  const comm=(cache.commesse||[]).find(x=>String(x.id)===String(cid));
+  if(!comm){ c.innerHTML='<div class="alert r">Commessa non trovata.</div>'; return; }
+  MA={c:comm, cid:String(cid), tab:tab||(MA&&MA.cid===String(cid)?MA.tab:"av"), back:back||(MA&&MA.back)||"comm", fasi:[], items:[], cells:[], ore:{}, gen:{ore:0,costo:0}};
+  c.innerHTML='<div class="empty"><div class="spin"></div>Caricamento microaree...</div>';
+  const [s,o]=await Promise.all([maLoadStruttura(comm.id), maLoadOre(comm.id)]);
+  if(!s.ok){ c.innerHTML=maTop()+'<div class="alert r">'+(s.err==="sql"?MA_SQL_MSG:"Errore di lettura: "+esc(s.err))+'</div>'; return; }
+  MA.fasi=s.fasi; MA.items=s.items; MA.cells=s.cells;
+  if(o.ok){ MA.ore=o.ore; MA.gen=o.gen; } else MA.oreErr=o.err;
+  maCalc(); maRender();
+}
+
+function maTop(){
+  const x=MA.c;
+  return '<div class="ma-top"><button class="btn bo" onclick="go(\''+MA.back+'\')">← '+(MA.back==="prod"?"Produttività":"Commesse")+'</button>' +
+    '<div style="flex:1;min-width:200px"><div class="card-title" style="margin:0">Microaree — '+esc(x.codice)+'</div><div class="prod-sub">'+esc(x.cliente)+' · '+esc(x.cantiere)+(x.descrizione?' · '+esc(x.descrizione):'')+'</div></div>' +
+    (MA.items.length && maIsDir() ? '<div class="ma-tabs"><button class="'+(MA.tab==="av"?"on":"")+'" onclick="MA.tab=\'av\';maRender()">Avanzamento</button><button class="'+(MA.tab==="st"?"on":"")+'" onclick="MA.tab=\'st\';maRender()">Struttura</button></div>' : '') +
+    '</div><div id="ma-msg"></div>';
+}
+function maMsg(cls, html){ const m=document.getElementById("ma-msg"); if(m){ m.innerHTML='<div class="alert '+cls+'">'+html+'</div>'; if(cls==="g") setTimeout(()=>{ if(m.firstChild) m.innerHTML=""; },3500); } }
+
+function maRender(){
+  const c=document.getElementById("content");
+  if(!MA.items.length && !MA.fasi.length){
+    c.innerHTML = maTop() + '<div class="card ma-empty">' +
+      '<div class="card-title">Questa commessa non ha ancora microaree</div>' +
+      '<p>Suddividi la commessa in item (per esempio le singole porte) e in lavorazioni (imbarco, montaggio, saldatura, consegna). Ogni incrocio diventa una microarea su cui il capo cantiere registra ore e avanzamento.</p>' +
+      (maIsDir() ? '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px"><button class="btn bp" onclick="maImportPick()">Importa da Excel</button><button class="btn bo" onclick="MA.tab=\'st\';maRenderSt(true)">Crea manualmente</button></div>' +
+        '<p class="prod-sub" style="margin-top:10px">Il file Excel deve avere una riga di intestazione con la colonna Item/Descrizione, una colonna per ogni lavorazione e una X nelle lavorazioni previste per ciascun item.</p>'
+        : '<p class="prod-sub" style="margin-top:10px">La struttura viene creata dalla Direzione.</p>') +
+      '</div><input type="file" id="ma-file" accept=".xlsx,.xls,.csv" style="display:none" onchange="maImportFile(this.files[0]);this.value=\'\'">';
+    return;
+  }
+  if(MA.tab==="st" && maIsDir()) return maRenderSt();
+  maRenderAv();
+}
+
+// ── Vista Avanzamento ──
+function maRenderAv(){
+  const T=MA.T, x=MA.c, dich=(+x.avanzamento||0)/100, delta=T.av-dich;
+  const oreTot=T.oreAttr+MA.gen.ore, quotaAttr=oreTot?T.oreAttr/oreTot:null;
+  let h = maTop() +
+    (MA.oreErr?'<div class="alert a">'+(MA.oreErr==="sql"?"Ore per microarea non disponibili: esegui migrazione_microaree.sql.":"Ore non leggibili: "+esc(MA.oreErr))+'</div>':'') +
+    '<div class="kg">' +
+      '<div class="kc"><div class="kl">Avanzamento fisico</div><div class="kv">'+fN(T.av*100,1)+'%</div><div class="ks">'+T.done+' di '+T.n+' lavorazioni completate</div></div>' +
+      '<div class="kc '+(Math.abs(delta)>0.05?"a":"g")+'"><div class="kl">Avanzamento dichiarato</div><div class="kv">'+fN(dich*100)+'%</div><div class="ks">scarto '+(delta>=0?"+":"−")+fN(Math.abs(delta*100),1)+' punti</div>' +
+        (maIsDir()&&Math.round(T.av*100)!==Math.round(dich*100)?'<button class="btn bo prod-mini" style="margin-top:6px" onclick="maAllinea()">Allinea a '+fN(Math.round(T.av*100))+'%</button>':'') + '</div>' +
+      '<div class="kc"><div class="kl">Stima ore a finire DI.MA.</div><div class="kv">'+fN(T.eac)+'</div><div class="ks">'+(T.eac==null?"servono ore registrate e avanzamento":fN(T.eff)+" ore attribuite al "+fN(T.avD*100,1)+"% delle lavorazioni DI.MA.")+'</div></div>' +
+      '<div class="kc '+(quotaAttr!=null&&quotaAttr<0.8?"a":"")+'"><div class="kl">Ore attribuite</div><div class="kv">'+fN(T.oreAttr)+'</div><div class="ks">'+(quotaAttr==null?"nessuna ora registrata":fP(quotaAttr,0)+" del totale · "+fN(MA.gen.ore)+" generali")+'</div></div>' +
+      (T.memoTot?'<div class="kc '+(T.memoOk===T.memoTot?"g":"")+'"><div class="kl">Consegne con test memo</div><div class="kv">'+T.memoOk+' / '+T.memoTot+'</div><div class="ks">nave finita solo a memo firmato</div></div>':'') +
+    '</div>';
+  const fasi=MA.fasi, items=MA.items;
+  h += '<div class="card" style="padding:0;overflow:hidden"><div class="ma-scroll"><table class="ma-mx"><thead><tr><th class="ma-st">Item</th>' +
+    fasi.map(f=>'<th class="ma-fh">'+esc(f.nome)+(f.richiede_memo?'<span>test memo</span>':'')+'</th>').join("") +
+    '<th class="nr">Item</th><th class="nr">Ore</th></tr></thead><tbody>' +
+    items.map(it=>{
+      const R=MA.row[it.id]||{sw:0,swp:0,ore:0,n:0,done:0};
+      return '<tr><td class="ma-st"><strong>'+esc(it.codice)+'</strong>'+(it.esecutore==="Terzi"?' <span class="pill pa">Terzi</span>':'')+'<br><span class="prod-sub">'+esc(it.descrizione||"")+(it.cantiere&&it.cantiere!==MA.c.cantiere?' · '+esc(it.cantiere):'')+'</span></td>' +
+        fasi.map(f=>maCellHTML(MA.cellBy[it.id+"|"+f.id], f, it)).join("") +
+        '<td class="nr ma-tot">'+(R.n?fN(R.sp/R.n*100)+"%":"—")+'</td><td class="nr ma-tot">'+fN(R.ore,1)+'</td></tr>';
+    }).join("") +
+    '</tbody><tfoot><tr><td class="ma-st">Avanzamento lavorazione</td>' +
+    fasi.map(f=>{ const C=MA.col[f.id]; if(!C) return '<td>—</td>';
+      return '<td class="ma-ft"><b>'+fN(C.sp/C.n*100)+'%</b><span>'+C.done+'/'+C.n+' completate</span><span>'+fN(C.ore,1)+' h registrate</span>'+(C.oreUnit!=null?'<span title="Ore effettive divise per gli item equivalenti completati">≈ '+fN(C.oreUnit,1)+' h per item</span>':'')+'</td>'; }).join("") +
+    '<td class="nr ma-tot"><b>'+fN(T.av*100,1)+'%</b></td><td class="nr ma-tot"><b>'+fN(T.oreAttr,1)+'</b></td></tr></tfoot></table></div></div>' +
+    '<div class="ma-leg"><span><i class="l0"></i>Da fare</span><span><i class="lp"></i>In corso</span><span><i class="lok"></i>Completata</span><span><i class="lw"></i>Ore registrate ma avanzamento a 0%</span><span><i class="lna"></i>Non prevista</span><span><b style="color:#C00000">●</b> Ore oltre il 30% della media della lavorazione</span><span><b style="color:#C00000">!</b> Test memo mancante</span>' +
+    (maCanEdit()?'<span class="prod-sub">Tocca una cella per aggiornare l\'avanzamento.</span>':'')+'</div>' +
+    '<div id="ma-ov"></div>';
+  document.getElementById("content").innerHTML=h;
+}
+
+function maCellHTML(x, f, it){
+  if(!x || !x.applicabile) return '<td class="ma-c ma-na">—</td>';
+  const p=Math.min(Math.max(+x.perc||0,0),100), e=(MA.ore[x.id]||{}).ore||0;
+  const cls = p>=100?"ma-ok":p>0?"ma-p":(e>0?"ma-w":"ma-0");
+  const over = maFuoriMedia(x);
+  const memoMiss = f.richiede_memo && p>=100 && !x.memo_rif;
+  const main = p>=100 ? "✓" : fN(p)+"%";
+  const inner = '<b>'+main+'</b><span>'+([e?fN(e,1)+" h":"", f.richiede_memo&&x.memo_rif?"TM":""].filter(Boolean).join(" · ")||"&nbsp;")+'</span>' + (p>0&&p<100?'<i style="width:'+p+'%"></i>':'') + (over?'<em title="Ore per item '+fN((over-1)*100)+'% sopra la media della lavorazione">●</em>':'') + (memoMiss?'<em title="Manca il riferimento al test memo">!</em>':'');
+  return '<td class="ma-c '+cls+'">'+(maCanEdit()?'<button onclick="maCell(\''+x.id+'\')" aria-label="'+esc(it.codice+" "+f.nome)+' '+main+'">'+inner+'</button>':'<div>'+inner+'</div>')+'</td>';
+}
+
+function maCell(id){
+  const x=MA.cells.find(c=>c.id===id); if(!x) return;
+  const f=MA.fById[x.fase_id], it=MA.iById[x.item_id], o=MA.ore[x.id]||{ore:0,gg:{},ris:{}}, C=MA.col[x.fase_id]||{};
+  const p=+x.perc||0, fin = o.ore>0&&p>0 ? o.ore/(p/100) : null, over=maFuoriMedia(x);
+  const ris=Object.entries(o.ris||{}).sort((a,b)=>b[1]-a[1]);
+  document.getElementById("ma-ov").innerHTML =
+    '<div class="ma-ovl" onclick="if(event.target===this)maClose()"><div class="ma-mod" role="dialog" aria-modal="true">' +
+    '<div class="card-title" style="margin-bottom:2px">'+esc(it.codice)+' · '+esc(f.nome)+'</div><div class="prod-sub" style="margin-bottom:14px">'+esc(it.descrizione||"")+(it.esecutore==="Terzi"?" · eseguito da terzi":"")+'</div>' +
+    '<label class="fl">Avanzamento della lavorazione</label>' +
+    '<div class="ma-q">'+[0,25,50,75,100].map(v=>'<button class="btn '+(p===v?"bp":"bo")+'" onclick="maSetP('+v+')">'+(v===100?"Completata":v+"%")+'</button>').join("")+'</div>' +
+    '<div class="fg" style="display:flex;align-items:center;gap:8px;margin-top:8px"><input class="fi" type="number" id="ma-p" min="0" max="100" step="5" value="'+p+'" style="width:90px" oninput="maSetP(this.value,true)"><span>%</span></div>' +
+    (f.richiede_memo?'<div class="ma-memo"><div class="prod-sub" style="margin-bottom:6px">La lavorazione si considera completata solo con il test memo che attesta la consegna.</div><div class="fr2"><div class="fg"><label class="fl">N. test memo</label><input class="fi" id="ma-mr" value="'+esc(x.memo_rif||"")+'"></div><div class="fg"><label class="fl">Data</label><input class="fi" type="date" id="ma-md" value="'+esc(x.memo_data||"")+'"></div></div></div>':'') +
+    '<div class="fg"><label class="fl">Note</label><input class="fi" id="ma-nt" value="'+esc(x.note||"")+'" placeholder="Impedimenti, materiale mancante, attese"></div>' +
+    '<div class="ma-info"><div><span>Ore registrate</span><b>'+fN(o.ore,1)+'</b></div><div><span>Giorni</span><b>'+Object.keys(o.gg||{}).length+'</b></div><div><span>Stima a finire</span><b class="'+(over?"neg":"")+'">'+(fin==null?"—":fN(fin,1)+" h")+'</b></div><div><span>Media lavorazione</span><b>'+(C.oreUnit!=null&&it.esecutore!=="Terzi"?fN(C.oreUnit,1)+" h":"—")+'</b></div></div>' +
+    (ris.length?'<div class="prod-sub" style="margin:8px 0 0">'+ris.slice(0,6).map(r=>esc(r[0])+" "+fN(r[1],1)+" h").join(" · ")+'</div>':'') +
+    (x.updated_by?'<div class="prod-sub" style="margin-top:6px">Ultimo aggiornamento: '+esc(x.updated_by)+(x.updated_at?" — "+new Date(x.updated_at).toLocaleString("it-IT"):"")+'</div>':'') +
+    '<div id="ma-merr"></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px"><button class="btn bo" onclick="maClose()">Annulla</button><button class="btn bp" onclick="maSaveCell(\''+x.id+'\')">💾 Salva</button></div>' +
+    '</div></div>';
+  document.getElementById("ma-p").focus();
+}
+function maSetP(v, fromInput){
+  v=Math.min(Math.max(parseFloat(v)||0,0),100);
+  if(!fromInput) document.getElementById("ma-p").value=v;
+  document.querySelectorAll(".ma-q button").forEach((b,k)=>{ b.className="btn "+([0,25,50,75,100][k]===v?"bp":"bo"); });
+}
+function maClose(){ const o=document.getElementById("ma-ov"); if(o) o.innerHTML=""; }
+document.addEventListener("keydown", e=>{ if(e.key==="Escape") maClose(); });
+
+async function maSaveCell(id){
+  const x=MA.cells.find(c=>c.id===id), f=MA.fById[x.fase_id];
+  const err=document.getElementById("ma-merr");
+  const p=parseFloat(document.getElementById("ma-p").value);
+  if(isNaN(p)||p<0||p>100){ err.innerHTML='<div class="alert r" style="margin-top:10px">L\'avanzamento deve essere tra 0 e 100%.</div>'; return; }
+  const body={perc:p, note:document.getElementById("ma-nt").value.trim()||null, updated_at:new Date().toISOString(), updated_by:CU.email};
+  if(f.richiede_memo){
+    body.memo_rif=document.getElementById("ma-mr").value.trim()||null;
+    body.memo_data=document.getElementById("ma-md").value||null;
+    if(p>=100 && !body.memo_rif){ err.innerHTML='<div class="alert r" style="margin-top:10px">Per segnare la consegna come completata inserisci il numero del test memo.</div>'; return; }
+  }
+  sync("salvataggio...",false);
+  const r=await sb("commessa_microaree","id=eq."+id,"PATCH",body);
+  if(!r.ok){ sync("● Errore",false); err.innerHTML='<div class="alert r" style="margin-top:10px">Salvataggio non riuscito: '+esc((r.data&&r.data.message)||r.status)+'</div>'; return; }
+  Object.assign(x, body); sync("● Connesso",true);
+  maClose(); maCalc(); maRenderAv();
+  maMsg("g","✅ "+esc(MA.iById[x.item_id].codice)+" · "+esc(f.nome)+" aggiornata a "+fN(p)+"%");
+}
+
+async function maAllinea(){
+  const v=Math.round(MA.T.av*100);
+  if(!confirm("Aggiornare l'avanzamento della commessa "+MA.c.codice+" da "+(+MA.c.avanzamento||0)+"% a "+v+"%?")) return;
+  sync("salvataggio...",false);
+  const r=await sb("commesse","id=eq."+MA.c.id,"PATCH",{avanzamento:v, updated_at:new Date().toISOString()});
+  if(!r.ok){ sync("● Errore",false); maMsg("r","Aggiornamento non riuscito: "+esc((r.data&&r.data.message)||r.status)); return; }
+  MA.c.avanzamento=v; sync("● Connesso",true); maRenderAv();
+  maMsg("g","✅ Avanzamento commessa allineato a "+v+"%. Il modulo Produttività usa ora questo valore.");
+}
+
+// ── Vista Struttura (Direzione) ──
+function maRenderSt(){
+  const fasi=MA.fasi, items=MA.items;
+  const oreF=f=>MA.cells.filter(x=>x.fase_id===f).reduce((a,x)=>a+((MA.ore[x.id]||{}).ore||0),0);
+  const oreI=i=>MA.cells.filter(x=>x.item_id===i).reduce((a,x)=>a+((MA.ore[x.id]||{}).ore||0),0);
+  document.getElementById("content").innerHTML = maTop() +
+  '<div class="fr2 ma-st2">' +
+  '<div class="card"><div class="card-title">Lavorazioni</div><div style="overflow-x:auto"><table class="ma-ed"><thead><tr><th>Nome</th><th style="text-align:center">Test memo</th><th></th></tr></thead><tbody>' +
+    fasi.map((f,k)=>'<tr><td><input class="fi" value="'+esc(f.nome)+'" onchange="maUpd(\'commessa_fasi\',\''+f.id+'\',{nome:this.value.trim()},this)"></td>' +
+      '<td style="text-align:center"><input type="checkbox" '+(f.richiede_memo?"checked":"")+' onchange="maUpd(\'commessa_fasi\',\''+f.id+'\',{richiede_memo:this.checked},this)" aria-label="Richiede test memo"></td>' +
+      '<td style="white-space:nowrap"><button class="btn bo prod-mini" '+(k===0?"disabled":"")+' onclick="maMove(\'commessa_fasi\','+k+',-1)" aria-label="Sposta su">↑</button> <button class="btn bd prod-mini" onclick="maDel(\'commessa_fasi\',\''+f.id+'\','+oreF(f.id)+')" aria-label="Elimina">🗑</button></td></tr>').join("") +
+    '</tbody></table></div>' +
+    '<div class="ma-add"><input class="fi" id="ma-nf" placeholder="Nuova lavorazione"><button class="btn bp" onclick="maAddFase()">Aggiungi</button></div></div>' +
+  '<div class="card"><div class="card-title">Item</div><div style="overflow-x:auto"><table class="ma-ed"><thead><tr><th>Codice</th><th>Descrizione</th><th>Esecutore</th><th></th></tr></thead><tbody>' +
+    items.map((it,k)=>'<tr><td><input class="fi" style="min-width:110px" value="'+esc(it.codice||"")+'" onchange="maUpd(\'commessa_item\',\''+it.id+'\',{codice:this.value.trim()},this)"></td>' +
+      '<td><input class="fi" style="min-width:150px" value="'+esc(it.descrizione||"")+'" onchange="maUpd(\'commessa_item\',\''+it.id+'\',{descrizione:this.value.trim()},this)"></td>' +
+      '<td><select class="fs" onchange="maUpd(\'commessa_item\',\''+it.id+'\',{esecutore:this.value},this)"><option'+(it.esecutore!=="Terzi"?" selected":"")+'>DI.MA.</option><option'+(it.esecutore==="Terzi"?" selected":"")+'>Terzi</option></select></td>' +
+      '<td style="white-space:nowrap"><button class="btn bo prod-mini" '+(k===0?"disabled":"")+' onclick="maMove(\'commessa_item\','+k+',-1)" aria-label="Sposta su">↑</button> <button class="btn bd prod-mini" onclick="maDel(\'commessa_item\',\''+it.id+'\','+oreI(it.id)+')" aria-label="Elimina">🗑</button></td></tr>').join("") +
+    '</tbody></table></div>' +
+    '<div class="ma-add"><input class="fi" id="ma-ni" placeholder="Codice item"><input class="fi" id="ma-nid" placeholder="Descrizione"><button class="btn bp" onclick="maAddItem()">Aggiungi</button></div></div>' +
+  '</div>' +
+  (fasi.length&&items.length ? '<div class="card"><div class="card-title">Lavorazioni previste per item</div><p class="prod-sub" style="margin:-8px 0 12px">Spunta le lavorazioni che vanno eseguite su ciascun item. Ogni lavorazione prevista pesa allo stesso modo nell\'avanzamento.</p>' +
+    '<div class="ma-scroll"><table class="ma-mx"><thead><tr><th class="ma-st">Item</th>'+fasi.map(f=>'<th class="ma-fh">'+esc(f.nome)+'</th>').join("")+'</tr></thead><tbody>' +
+    items.map(it=>'<tr><td class="ma-st"><strong>'+esc(it.codice)+'</strong></td>'+fasi.map(f=>{ const x=MA.cellBy[it.id+"|"+f.id];
+      return '<td style="text-align:center"><input type="checkbox" class="ma-chk" '+(x&&x.applicabile?"checked":"")+' onchange="maToggle(\''+it.id+'\',\''+f.id+'\',this)" aria-label="'+esc(it.codice+" "+f.nome)+'"></td>'; }).join("")+'</tr>').join("") +
+    '</tbody></table></div></div>' : '') +
+  '<div class="card ma-danger"><div><strong>Elimina l\'intera struttura</strong><div class="prod-sub">Cancella item, lavorazioni e avanzamenti. Le ore già registrate restano nei rapportini come ore generali.</div></div><button class="btn bd" onclick="maDelAll()">Elimina struttura</button></div>' +
+  '<input type="file" id="ma-file" accept=".xlsx,.xls,.csv" style="display:none" onchange="maImportFile(this.files[0]);this.value=\'\'">';
+}
+
+async function maUpd(table,id,body,el){
+  sync("salvataggio...",false);
+  const r=await sb(table,"id=eq."+id,"PATCH",body);
+  if(!r.ok){ sync("● Errore",false); maMsg("r","Modifica non salvata: "+esc((r.data&&r.data.message)||r.status)); if(el) el.style.borderColor="#C00000"; return false; }
+  const arr=table==="commessa_fasi"?MA.fasi:MA.items; const o=arr.find(z=>z.id===id); if(o) Object.assign(o,body);
+  sync("● Connesso",true); if(el){ el.style.borderColor="#70AD47"; setTimeout(()=>el.style.borderColor="",1200); }
+  maCalc(); return true;
+}
+async function maMove(table,k,dir){
+  const arr=table==="commessa_fasi"?MA.fasi:MA.items; const j=k+dir; if(j<0||j>=arr.length) return;
+  [arr[k],arr[j]]=[arr[j],arr[k]];
+  sync("salvataggio...",false);
+  const rs=await Promise.all(arr.map((o,n)=>o.ordine===n?{ok:true}:sb(table,"id=eq."+o.id,"PATCH",{ordine:n}).then(r=>{ if(r.ok) o.ordine=n; return r; })));
+  sync(rs.every(r=>r.ok)?"● Connesso":"● Errore", rs.every(r=>r.ok));
+  maCalc(); maRenderSt();
+}
+async function maAddFase(){
+  const nome=document.getElementById("ma-nf").value.trim(); if(!nome){ maMsg("a","Scrivi il nome della lavorazione."); return; }
+  sync("salvataggio...",false);
+  const r=await sb("commessa_fasi","","POST",{commessa_id:MA.c.id, ordine:MA.fasi.length, nome, richiede_memo:/consegna|test memo/i.test(nome)});
+  if(!r.ok){ sync("● Errore",false); maMsg("r",r.status&&maErr(r)==="sql"?MA_SQL_MSG:"Lavorazione non creata: "+esc((r.data&&r.data.message)||r.status)); return; }
+  const f=r.data[0];
+  if(MA.items.length) await sb("commessa_microaree","","POST",MA.items.map(it=>({commessa_id:MA.c.id,item_id:it.id,fase_id:f.id,applicabile:true})));
+  await pgMicro(MA.cid,"st");
+}
+async function maAddItem(){
+  const cod=document.getElementById("ma-ni").value.trim(); if(!cod){ maMsg("a","Scrivi il codice dell'item."); return; }
+  sync("salvataggio...",false);
+  const r=await sb("commessa_item","","POST",{commessa_id:MA.c.id, ordine:MA.items.length, codice:cod, descrizione:document.getElementById("ma-nid").value.trim()||null, cantiere:MA.c.cantiere||null, esecutore:"DI.MA."});
+  if(!r.ok){ sync("● Errore",false); maMsg("r",maErr(r)==="sql"?MA_SQL_MSG:"Item non creato: "+esc((r.data&&r.data.message)||r.status)); return; }
+  const it=r.data[0];
+  if(MA.fasi.length) await sb("commessa_microaree","","POST",MA.fasi.map(f=>({commessa_id:MA.c.id,item_id:it.id,fase_id:f.id,applicabile:true})));
+  await pgMicro(MA.cid,"st");
+}
+async function maToggle(itemId,faseId,el){
+  const x=MA.cellBy[itemId+"|"+faseId];
+  sync("salvataggio...",false);
+  let r;
+  if(x){ r=await sb("commessa_microaree","id=eq."+x.id,"PATCH",{applicabile:el.checked}); if(r.ok) x.applicabile=el.checked; }
+  else { r=await sb("commessa_microaree","","POST",{commessa_id:MA.c.id,item_id:itemId,fase_id:faseId,applicabile:el.checked}); if(r.ok){ MA.cells.push(r.data[0]); } }
+  if(!r.ok){ el.checked=!el.checked; sync("● Errore",false); maMsg("r","Modifica non salvata."); return; }
+  sync("● Connesso",true); maCalc();
+}
+async function maDel(table,id,ore){
+  const lbl=table==="commessa_fasi"?"la lavorazione":"l'item";
+  if(!confirm("Eliminare "+lbl+"?"+(ore>0?"\n\nSu questa voce sono registrate "+fN(ore,1)+" ore: resteranno nei rapportini come ore generali.":""))) return;
+  sync("eliminazione...",false);
+  const r=await sb(table,"id=eq."+id,"DELETE");
+  if(!r.ok){ sync("● Errore",false); maMsg("r","Eliminazione non riuscita: "+esc((r.data&&r.data.message)||r.status)); return; }
+  await pgMicro(MA.cid,"st");
+}
+async function maDelAll(){
+  if(!confirm("Eliminare l'intera struttura microaree di "+MA.c.codice+"?\n\nItem, lavorazioni e avanzamenti verranno cancellati. Le "+fN(MA.T.oreAttr,1)+" ore attribuite resteranno nei rapportini come ore generali.")) return;
+  if(prompt("Per confermare scrivi il codice della commessa: "+MA.c.codice)!==String(MA.c.codice)) return;
+  sync("eliminazione...",false);
+  const r1=await sb("commessa_item","commessa_id=eq."+MA.c.id,"DELETE"), r2=await sb("commessa_fasi","commessa_id=eq."+MA.c.id,"DELETE");
+  sync(r1.ok&&r2.ok?"● Connesso":"● Errore", r1.ok&&r2.ok);
+  MA.tab="av"; await pgMicro(MA.cid,"av");
+}
+
+// ── Import da Excel ──
+function maImportPick(){ const f=document.getElementById("ma-file"); if(f) f.click(); }
+function maLoadXLSX(){
+  if(window.XLSX) return Promise.resolve(true);
+  return new Promise(res=>{ const s=document.createElement("script"); s.src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"; s.onload=()=>res(true); s.onerror=()=>res(false); document.head.appendChild(s); });
+}
+function maSplit(d){
+  d=d.replace(/\s+/g," ").trim();
+  let k=d.indexOf(" - ");
+  if(k>0) return {codice:d.slice(0,k).trim(), descrizione:d.slice(k+3).trim()};
+  const m=d.match(/^(\S*[\/\d]\S*)\s+(.+)$/);
+  if(m) return {codice:m[1], descrizione:m[2]};
+  return {codice:d, descrizione:""};
+}
+function maParse(rows){
+  let h=-1, ci=-1;
+  for(let r=0;r<Math.min(rows.length,40);r++){ const k=(rows[r]||[]).findIndex(v=>/item|descrizione/i.test(String(v))); if(k>=0){ h=r; ci=k; break; } }
+  if(h<0) return null;
+  const hdr=rows[h].map(v=>String(v||"").replace(/\s+/g," ").trim());
+  const cc=hdr.findIndex(v=>/cantiere/i.test(v));
+  const fc=[]; hdr.forEach((v,k)=>{ if(k>ci && v && !/inserto/i.test(v)) fc.push(k); });
+  if(!fc.length) return null;
+  const items=[];
+  for(let r=h+1;r<rows.length;r++){
+    const row=rows[r]||[], d=String(row[ci]||"").trim();
+    if(!d){ if(items.length) break; else continue; }
+    items.push({...maSplit(d), cantiere:cc>=0?String(row[cc]||"").trim():"", app:fc.map(k=>String(row[k]==null?"":row[k]).trim()!=="")});
+  }
+  if(!items.length) return null;
+  const cnt={}; items.forEach(it=>{ if(it.cantiere) cnt[it.cantiere.toUpperCase()]=(cnt[it.cantiere.toUpperCase()]||0)+1; });
+  const main=Object.keys(cnt).sort((a,b)=>cnt[b]-cnt[a])[0]||"";
+  items.forEach(it=>{ it.fuori = !!(main && it.cantiere && it.cantiere.toUpperCase()!==main); });
+  const titolo = h>0 ? (rows[h-1]||[]).map(v=>String(v||"").trim()).filter(Boolean).join(" ") : "";
+  return {titolo, main, fasi:fc.map((k,j)=>({nome:hdr[k], vuota:items.every(it=>!it.app[j]), memo:/consegna|test memo/i.test(hdr[k])})), items};
+}
+async function maImportFile(file){
+  if(!file) return;
+  maMsg("b",'<div class="spin"></div>Lettura del file...');
+  if(!(await maLoadXLSX())){ maMsg("r","Impossibile caricare il lettore Excel: verifica la connessione internet."); return; }
+  let P=null;
+  try{
+    const wb=XLSX.read(await file.arrayBuffer(),{type:"array"});
+    for(const n of wb.SheetNames){ P=maParse(XLSX.utils.sheet_to_json(wb.Sheets[n],{header:1,defval:"",raw:false})); if(P) break; }
+  }catch(e){ maMsg("r","File non leggibile: "+esc(e.message)); return; }
+  if(!P){ maMsg("r","Non trovo la tabella: serve una riga di intestazione con la colonna Item/Descrizione e le colonne delle lavorazioni."); return; }
+  MA.imp=P; document.getElementById("ma-msg").innerHTML="";
+  const c=document.getElementById("content"); let ov=document.getElementById("ma-ov");
+  if(!ov){ ov=document.createElement("div"); ov.id="ma-ov"; c.appendChild(ov); }
+  const nApp=P.items.reduce((a,it)=>a+it.app.filter(Boolean).length,0);
+  ov.innerHTML='<div class="ma-ovl"><div class="ma-mod ma-wide" role="dialog" aria-modal="true">' +
+    '<div class="card-title" style="margin-bottom:2px">Anteprima importazione</div><div class="prod-sub" style="margin-bottom:14px">'+esc(file.name)+(P.titolo?' · '+esc(P.titolo):'')+' · '+P.items.length+' item · '+P.fasi.length+' lavorazioni · '+nApp+' celle con X</div>' +
+    '<label class="fl">Lavorazioni</label><table class="ma-ed" style="margin-bottom:14px"><thead><tr><th>Nome</th><th style="text-align:center">Test memo</th><th>Colonna senza X</th></tr></thead><tbody>' +
+    P.fasi.map((f,j)=>'<tr><td><input class="fi" id="imf-n'+j+'" value="'+esc(f.nome)+'"></td><td style="text-align:center"><input type="checkbox" id="imf-m'+j+'" '+(f.memo?"checked":"")+'></td>' +
+      '<td>'+(f.vuota?'<label style="font-size:12px"><input type="checkbox" id="imf-t'+j+'" checked> prevedi per tutti gli item</label>':'<span class="prod-sub">—</span>')+'</td></tr>').join("") +
+    '</tbody></table>' +
+    '<label class="fl">Item</label><div style="max-height:260px;overflow:auto;border:1px solid #DEE2E8;border-radius:8px"><table class="ma-ed"><thead><tr><th>Codice</th><th>Descrizione</th><th>Cantiere</th><th class="nr">Lavorazioni</th><th>Esecutore</th></tr></thead><tbody>' +
+    P.items.map((it,i)=>'<tr'+(it.fuori?' style="background:#FFF2CC"':'')+'><td><strong>'+esc(it.codice)+'</strong></td><td>'+esc(it.descrizione)+'</td><td>'+esc(it.cantiere)+(it.fuori?' <span class="prod-sub">diverso da '+esc(P.main)+'</span>':'')+'</td><td class="nr">'+it.app.filter(Boolean).length+'</td>' +
+      '<td><select class="fs" id="imi-e'+i+'" style="font-size:12px"><option'+(!it.fuori?" selected":"")+'>DI.MA.</option><option'+(it.fuori?" selected":"")+'>Terzi</option></select></td></tr>').join("") +
+    '</tbody></table></div>' +
+    '<p class="prod-sub" style="margin-top:8px">Gli item eseguiti da terzi contano nell\'avanzamento fisico ma non nelle ore e nella produttività DI.MA. e non compaiono nel rapportino. Le righe evidenziate hanno un cantiere diverso da quello prevalente.</p>' +
+    '<div id="ma-merr"></div><div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px"><button class="btn bo" onclick="maClose()">Annulla</button><button class="btn bp" id="ma-impok" onclick="maImportSave()">Crea struttura</button></div>' +
+    '</div></div>';
+}
+async function maImportSave(){
+  const P=MA.imp, cid=MA.c.id, err=document.getElementById("ma-merr"), btn=document.getElementById("ma-impok");
+  if(MA.items.length||MA.fasi.length){ err.innerHTML='<div class="alert r" style="margin-top:10px">La commessa ha già una struttura: eliminala prima di importare.</div>'; return; }
+  const fasi=P.fasi.map((f,j)=>({commessa_id:cid, ordine:j, nome:document.getElementById("imf-n"+j).value.trim()||f.nome, richiede_memo:document.getElementById("imf-m"+j).checked}));
+  const tutti=P.fasi.map((f,j)=>f.vuota && document.getElementById("imf-t"+j) && document.getElementById("imf-t"+j).checked);
+  const items=P.items.map((it,i)=>({commessa_id:cid, ordine:i, codice:it.codice, descrizione:it.descrizione||null, cantiere:it.cantiere||null, esecutore:document.getElementById("imi-e"+i).value}));
+  btn.disabled=true; btn.textContent="Creazione..."; sync("salvataggio...",false);
+  const fail=async(msg)=>{ await sb("commessa_item","commessa_id=eq."+cid,"DELETE"); await sb("commessa_fasi","commessa_id=eq."+cid,"DELETE"); sync("● Errore",false); btn.disabled=false; btn.textContent="Crea struttura"; err.innerHTML='<div class="alert r" style="margin-top:10px">'+msg+'</div>'; };
+  const rf=await sb("commessa_fasi","","POST",fasi);
+  if(!rf.ok) return fail(maErr(rf)==="sql"?MA_SQL_MSG:"Lavorazioni non create: "+esc((rf.data&&rf.data.message)||rf.status));
+  const ri=await sb("commessa_item","","POST",items);
+  if(!ri.ok) return fail("Item non creati: "+esc((ri.data&&ri.data.message)||ri.status));
+  const fBy={}; rf.data.forEach(f=>fBy[f.ordine]=f.id);
+  const iBy={}; ri.data.forEach(i=>iBy[i.ordine]=i.id);
+  const cells=[];
+  P.items.forEach((it,i)=>P.fasi.forEach((f,j)=>cells.push({commessa_id:cid, item_id:iBy[i], fase_id:fBy[j], applicabile:!!(it.app[j]||tutti[j])})));
+  for(let k=0;k<cells.length;k+=500){
+    const rc=await sb("commessa_microaree","","POST",cells.slice(k,k+500));
+    if(!rc.ok) return fail("Microaree non create: "+esc((rc.data&&rc.data.message)||rc.status));
+  }
+  sync("● Connesso",true); MA.imp=null;
+  await pgMicro(MA.cid,"st");
+  maMsg("g","✅ Struttura creata: "+items.length+" item, "+fasi.length+" lavorazioni. Il capo cantiere può già aggiornare l'avanzamento e registrare le ore.");
+}
+
 </script>
 </body>
 </html>
